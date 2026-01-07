@@ -15,10 +15,9 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-  // @ts-ignore
-  import * as pagefind from '/_pagefind/pagefind.js';
-
   async function initSearch() {
+    // @ts-ignore - 动态导入，运行时加载
+    const pagefind = await import('/_pagefind/pagefind.js');
     await pagefind.init();
 
     const searchContainer = document.getElementById('search-container');
