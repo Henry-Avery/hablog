@@ -1,13 +1,11 @@
 # Pagefind Configuration
 # https://pagefind.app/docs/config-options/
 
-site: dist
+site: .vercel/output/static
 
 glob: '**/*.html'
 
 output_subdir: _pagefind
-
-bundle_dir: _pagefind
 
 force_language: en
 

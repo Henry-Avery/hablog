@@ -38,7 +38,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "pnpm run clean:images && astro build && pagefind --site dist",
+    "build": "pnpm run clean:images && astro build && pagefind --site .vercel/output/static",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write ./src",
