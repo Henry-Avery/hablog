@@ -1,4 +1,7 @@
 ---
+// 告诉 Astro 这个页面要在构建时生成静态 HTML（用于博客文章）
+export const prerender = true;
+
 import { getCollection, getEntry, render } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
 import MainGridLayout from '@components/layout/MainGridLayout.astro'

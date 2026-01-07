@@ -30,6 +30,7 @@
     "remark-directive": "^3.0.1",
     "remark-github-admonitions-to-directives": "^1.0.5",
     "remark-math": "^6.0.0",
+    "sharp": "^0.34.5",
     "svelte": "^5.46.1",
     "tailwindcss": "^4.1.4",
     "unist-util-visit": "^5.0.0"
