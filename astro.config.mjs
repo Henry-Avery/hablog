@@ -4,7 +4,7 @@ import svelte from '@astrojs/svelte';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 import tailwindcss from '@tailwindcss/vite';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 
 // Markdown plugins
 import remarkDirective from 'remark-directive';
@@ -24,9 +24,7 @@ export default defineConfig({
     keystatic()
   ],
   output: 'server',
-  adapter: node({
-    mode: 'standalone'
-  }),
+  adapter: vercel(),
   markdown: {
     remarkPlugins: [
       remarkDirective,
