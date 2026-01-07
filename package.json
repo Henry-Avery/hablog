@@ -37,12 +37,12 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run clean:images && astro build && pagefind --site dist",
+    "build": "pnpm run clean:images && astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write ./src",
     "clean:images": "node scripts/clean-orphaned-images.js",
-    "predev": "npm run clean:images"
+    "predev": "pnpm run clean:images"
   },
   "devDependencies": {
     "pagefind": "^1.4.0",
