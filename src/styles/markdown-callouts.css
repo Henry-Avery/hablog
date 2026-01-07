@@ -1,0 +1,135 @@
+/**
+ * Markdown Callouts (Admonitions) Styles
+ * Supports: note, tip, important, warning, caution
+ */
+
+/* Base callout styles */
+.callout {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid;
+  border-radius: 0.5rem;
+  background-color: var(--callout-bg);
+  color: var(--callout-text);
+}
+
+.callout > :first-child {
+  margin-top: 0;
+}
+
+.callout > :last-child {
+  margin-bottom: 0;
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.callout-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Note - Blue */
+.callout-note {
+  --callout-bg: oklch(0.95 0.02 240);
+  --callout-border: oklch(0.60 0.15 240);
+  --callout-text: oklch(0.30 0.05 240);
+  border-left-color: var(--callout-border);
+}
+
+.dark .callout-note {
+  --callout-bg: oklch(0.25 0.03 240);
+  --callout-border: oklch(0.65 0.15 240);
+  --callout-text: oklch(0.85 0.02 240);
+}
+
+/* Tip - Green */
+.callout-tip {
+  --callout-bg: oklch(0.95 0.02 140);
+  --callout-border: oklch(0.55 0.15 140);
+  --callout-text: oklch(0.30 0.05 140);
+  border-left-color: var(--callout-border);
+}
+
+.dark .callout-tip {
+  --callout-bg: oklch(0.25 0.03 140);
+  --callout-border: oklch(0.60 0.15 140);
+  --callout-text: oklch(0.85 0.02 140);
+}
+
+/* Important - Purple */
+.callout-important {
+  --callout-bg: oklch(0.95 0.02 280);
+  --callout-border: oklch(0.60 0.15 280);
+  --callout-text: oklch(0.30 0.05 280);
+  border-left-color: var(--callout-border);
+}
+
+.dark .callout-important {
+  --callout-bg: oklch(0.25 0.03 280);
+  --callout-border: oklch(0.65 0.15 280);
+  --callout-text: oklch(0.85 0.02 280);
+}
+
+/* Warning - Orange */
+.callout-warning {
+  --callout-bg: oklch(0.95 0.02 40);
+  --callout-border: oklch(0.60 0.15 40);
+  --callout-text: oklch(0.30 0.05 40);
+  border-left-color: var(--callout-border);
+}
+
+.dark .callout-warning {
+  --callout-bg: oklch(0.25 0.03 40);
+  --callout-border: oklch(0.65 0.15 40);
+  --callout-text: oklch(0.85 0.02 40);
+}
+
+/* Caution - Red */
+.callout-caution {
+  --callout-bg: oklch(0.95 0.02 20);
+  --callout-border: oklch(0.60 0.15 20);
+  --callout-text: oklch(0.30 0.05 20);
+  border-left-color: var(--callout-border);
+}
+
+.dark .callout-caution {
+  --callout-bg: oklch(0.25 0.03 20);
+  --callout-border: oklch(0.65 0.15 20);
+  --callout-text: oklch(0.85 0.02 20);
+}
+
+/* Content styling */
+.callout p {
+  margin: 0.5rem 0;
+}
+
+.callout code {
+  background-color: oklch(0 0 0 / 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.dark .callout code {
+  background-color: oklch(1 0 0 / 0.1);
+}
+
+.callout a {
+  color: var(--callout-border);
+  text-decoration: underline;
+}
+
+.callout a:hover {
+  opacity: 0.8;
+}
+
+/* Math formulas in callouts */
+.callout .katex-display {
+  margin: 1rem 0;
+}

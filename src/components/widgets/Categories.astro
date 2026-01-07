@@ -1,0 +1,41 @@
+---
+// Categories Widget - 简洁版分类列表
+import { getCategoryList } from "../../utils/content-utils";
+
+interface Props {
+	class?: string;
+	maxDisplay?: number;
+}
+
+const { class: className = "", maxDisplay = 6 } = Astro.props;
+
+const categories = await getCategoryList();
+const displayCategories = categories.slice(0, maxDisplay);
+---
+
+<div class:list={["card bg-base-100 shadow-xl border border-base-300", className]}>
+	<div class="card-body p-5">
+		<h2 class="card-title text-lg mb-2">
+			<span>📂</span>
+			Categories
+		</h2>
+
+		<div class="space-y-1">
+			{displayCategories.map((category) => (
+				<a
+					href={`/posts?category=${encodeURIComponent(category.name)}`}
+					class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-base-200 transition-colors"
+				>
+					<span class="text-sm">{category.name}</span>
+					<span class="badge badge-sm badge-ghost">{category.count}</span>
+				</a>
+			))}
+		</div>
+
+		{categories.length > maxDisplay && (
+			<a href="/archive/" class="btn btn-sm btn-ghost mt-2">
+				View All →
+			</a>
+		)}
+	</div>
+</div>

@@ -5,9 +5,10 @@ interface ButtonProps {
   type: 'ghost' | 'link' | 'outline' | 'disabled' | '';
   size: 'default' | 'large' | 'small' | 'tiny' | 'wide' | '';
   icon?: string;
+  external?: boolean;
 }
 
-const Button = ({ link, label, style, type, size, icon }: ButtonProps) => {
+const Button = ({ link, label, style, type, size, icon, external = false }: ButtonProps) => {
   const sizeClasses: Record<string, string> = {
     '': '',
     default: '',
@@ -26,9 +27,12 @@ const Button = ({ link, label, style, type, size, icon }: ButtonProps) => {
   };
 
   return (
-    <button
+    <a
+      href={link}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
       className={`
-        btn 
+        btn
         ${style === 'primary' ? 'btn-primary' : ''}
         ${style === 'secondary' ? 'btn-secondary' : ''}
         ${style === 'neutral' ? 'btn-neutral' : ''}
@@ -38,14 +42,18 @@ const Button = ({ link, label, style, type, size, icon }: ButtonProps) => {
         ${style === 'error' ? 'btn-error' : ''}
         ${typeClasses[type] || ''}
         ${sizeClasses[size] || ''}
-      `}
-    
-    >   
-    {icon && ( 
-        <span dangerouslySetInnerHTML={{ __html: icon }} /> 
+        transition-all duration-150
+        hover:shadow-lg hover:-translate-y-0.5
+        active:scale-95 active:shadow-sm
+        inline-flex items-center gap-2
+        no-underline
+      `.trim().replace(/\s+/g, ' ')}
+    >
+      {icon && (
+        <span className="inline-flex items-center" dangerouslySetInnerHTML={{ __html: icon }} />
       )}
-      <a href={link}>{label}</a>
-    </button>
+      {label}
+    </a>
   );
 };
 

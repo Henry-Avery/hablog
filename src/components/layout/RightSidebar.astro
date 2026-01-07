@@ -1,0 +1,84 @@
+---
+import SiteStats from '../widget/SiteStats.astro';
+import Calendar from '../widget/Calendar.astro';
+import TOC from '../widget/TOC.astro';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+	class?: string;
+	headings?: MarkdownHeading[];
+	showTOC?: boolean;
+	showStats?: boolean;
+	showCalendar?: boolean;
+}
+
+const {
+	class: className,
+	headings,
+	showTOC = false,
+	showStats = false,
+	showCalendar = false,
+} = Astro.props;
+---
+
+<aside class:list={["sidebar-right", className]}>
+	<div class="sidebar-sticky">
+		{showTOC && headings && headings.length > 0 && (
+			<TOC headings={headings} />
+		)}
+
+		{showStats && (
+			<SiteStats />
+		)}
+
+		{showCalendar && (
+			<Calendar />
+		)}
+
+		<!-- Slot for custom content -->
+		<slot />
+	</div>
+</aside>
+
+<style>
+	.sidebar-right {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.sidebar-sticky {
+		position: sticky;
+		top: 5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		max-height: calc(100vh - 6rem);
+		overflow-y: auto;
+	}
+
+	/* Custom scrollbar for sidebar */
+	.sidebar-sticky::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	.sidebar-sticky::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.sidebar-sticky::-webkit-scrollbar-thumb {
+		background: hsl(var(--bc) / 0.2);
+		border-radius: 3px;
+	}
+
+	.sidebar-sticky::-webkit-scrollbar-thumb:hover {
+		background: hsl(var(--bc) / 0.3);
+	}
+
+	/* Hide on mobile and tablet */
+	@media (max-width: 1024px) {
+		.sidebar-right {
+			display: none;
+		}
+	}
+</style>

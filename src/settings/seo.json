@@ -1,15 +1,15 @@
 {
   "seo": {
-    "title": "Astrokeys",
-    "description": "Astro + Keystatic CMS Starter Template",
-    "keywords": "astro, tailwindcss, keystatic"
+    "title": "henryavery.cn",
+    "description": "Henry Avery's personal blog and portfolio",
+    "keywords": "blog, tech, web development, programming"
   },
   "opengraph": {
-    "Title": "Astrokeys",
-    "Description": "Astro + Keystatic CMS Starter Template"
+    "Title": "henryavery.cn",
+    "Description": "Henry Avery's personal blog and portfolio"
   },
   "twitter": {
-    "Title": "Astrokeys",
-    "Description": "Astro + Keystatic CMS Starter Template"
+    "Title": "henryavery.cn",
+    "Description": "Henry Avery's personal blog and portfolio"
   }
 }

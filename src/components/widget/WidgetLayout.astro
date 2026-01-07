@@ -1,0 +1,78 @@
+---
+interface Props {
+	id: string;
+	name?: string;
+	isCollapsed?: boolean;
+	collapsedHeight?: string;
+	class?: string;
+}
+
+const { id, name, isCollapsed, collapsedHeight } = Astro.props;
+const className = Astro.props.class;
+---
+
+<widget-layout
+	data-id={id}
+	data-is-collapsed={String(isCollapsed)}
+	class:list={["card bg-base-200 p-4 mb-4", className]}
+>
+	{name && (
+		<div class="font-bold text-lg mb-3 flex items-center gap-2 relative pl-4
+			before:w-1.5 before:h-5 before:rounded-full before:bg-primary
+			before:absolute before:left-0 before:top-[4px]
+			before:transition-all before:duration-300">
+			{name}
+			<slot name="title-icon" />
+		</div>
+	)}
+
+	<div
+		id={id}
+		class:list={["overflow-hidden transition-all duration-300", {"collapsed": isCollapsed}]}
+	>
+		<slot></slot>
+	</div>
+
+	{isCollapsed && (
+		<div class="expand-btn mt-3">
+			<button class="btn btn-ghost btn-sm w-full gap-2 hover:gap-3 transition-all group">
+				<svg class="w-4 h-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+				</svg>
+				<span>Show more</span>
+			</button>
+		</div>
+	)}
+</widget-layout>
+
+<style define:vars={{ collapsedHeight }}>
+	.collapsed {
+		height: var(--collapsedHeight, 200px);
+	}
+</style>
+
+<script>
+	class WidgetLayout extends HTMLElement {
+		constructor() {
+			super();
+
+			if (this.dataset.isCollapsed !== "true") return;
+
+			const id = this.dataset.id;
+			const btn = this.querySelector('.expand-btn');
+			const wrapper = this.querySelector(`#${id}`);
+
+			if (btn && wrapper) {
+				btn.addEventListener('click', () => {
+					wrapper.classList.remove('collapsed');
+					wrapper.style.height = 'auto';
+					btn.classList.add('hidden');
+				});
+			}
+		}
+	}
+
+	if (!customElements.get("widget-layout")) {
+		customElements.define("widget-layout", WidgetLayout);
+	}
+</script>

@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Site start date - update this to your actual site start date
+const siteStartDate = "2026-01-01";
+
+// Get all posts
+const posts = await getCollection('posts');
+
+// Calculate total words
+let totalWords = 0;
+for (const post of posts) {
+  if (post.body) {
+    const text = post.body.replace(/\s+/g, " ").trim();
+    const chineseChars = text.match(/[\u4e00-\u9fa5]/g) || [];
+    const englishWords = text.match(/[a-zA-Z]+/g) || [];
+    totalWords += chineseChars.length + englishWords.length;
+  }
+}
+
+// Format number with thousand separators
+function formatNumber(num: number): string {
+  return num.toLocaleString();
+}
+
+// Get latest post date
+const latestPost = posts.reduce((latest, post) => {
+  if (!latest) return post;
+  return post.data.publishedDate > latest.data.publishedDate ? post : latest;
+}, posts[0]);
+
+const lastPostDate = latestPost
+  ? latestPost.data.publishedDate.toISOString()
+  : null;
+
+const stats = [
+  {
+    icon: "📝",
+    label: "Articles",
+    value: posts.length,
+  },
+  {
+    icon: "📊",
+    label: "Total Words",
+    value: formatNumber(totalWords),
+  },
+  {
+    icon: "📅",
+    label: "Running Days",
+    value: 0,
+    id: "running-days",
+  },
+  {
+    icon: "💓",
+    label: "Last Update",
+    value: 0,
+    suffix: "days ago",
+    id: "last-update",
+  },
+];
+---
+
+<div class:list={["stats stats-vertical shadow", className]}>
+  {stats.map((stat) => (
+    <div class="stat">
+      <div class="stat-figure text-2xl">{stat.icon}</div>
+      <div class="stat-title">{stat.label}</div>
+      <div class="stat-value text-2xl" data-stat-id={stat.id}>
+        {stat.value}
+      </div>
+      {stat.suffix && (
+        <div class="stat-desc">{stat.suffix}</div>
+      )}
+    </div>
+  ))}
+</div>
+
+<script is:inline define:vars={{ siteStartDate, lastPostDate }}>
+  function updateDynamicStats() {
+    const today = new Date();
+
+    // Update running days
+    const startDate = new Date(siteStartDate);
+    const diffTime = Math.abs(today.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    const runningDaysElement = document.querySelector('[data-stat-id="running-days"]');
+    if (runningDaysElement) {
+      runningDaysElement.textContent = diffDays.toString();
+    }
+
+    // Update last activity time
+    if (lastPostDate) {
+      const lastPost = new Date(lastPostDate);
+      const timeSinceLastPost = Math.abs(today.getTime() - lastPost.getTime());
+      const daysSinceLastUpdate = Math.floor(timeSinceLastPost / (1000 * 60 * 60 * 24));
+
+      const lastUpdateElement = document.querySelector('[data-stat-id="last-update"]');
+      if (lastUpdateElement) {
+        lastUpdateElement.textContent = daysSinceLastUpdate.toString();
+      }
+    }
+  }
+
+  // Update on page load
+  updateDynamicStats();
+
+  // Update every hour (optional, since days change slowly)
+  setInterval(updateDynamicStats, 60 * 60 * 1000);
+</script>

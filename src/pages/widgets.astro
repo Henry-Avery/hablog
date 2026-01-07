@@ -1,0 +1,247 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Profile from "../components/widgets/Profile.astro";
+import Categories from "../components/widgets/Categories.astro";
+import Tags from "../components/widgets/Tags.astro";
+---
+
+<Layout title="Widgets Showcase" description="Reusable sidebar widgets">
+	<div class="container mx-auto px-4 py-16 max-w-7xl">
+		<!-- Header -->
+		<div class="mb-12 text-center">
+			<h1 class="text-5xl font-bold mb-4">Widget Components</h1>
+			<p class="text-lg opacity-70 max-w-2xl mx-auto">
+				Reusable sidebar components for your blog. Simple, clean, and ready to use.
+			</p>
+		</div>
+
+		<!-- Main Content Grid -->
+		<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+			<!-- Left: Content -->
+			<div class="lg:col-span-2 space-y-8">
+				<!-- Introduction -->
+				<div class="card bg-base-100 shadow-xl">
+					<div class="card-body">
+						<h2 class="card-title text-2xl">Introduction</h2>
+						<p class="opacity-70 mb-4">
+							These widgets are designed to enhance your blog's sidebar with useful
+							information and navigation. Each component is built with DaisyUI and
+							follows consistent styling patterns.
+						</p>
+
+						<h3 class="text-xl font-bold mt-4">What Are Widgets?</h3>
+						<p class="opacity-70">
+							Widgets are reusable UI components that display specific information
+							or functionality in your sidebar. They help readers navigate your
+							content and discover related posts.
+						</p>
+					</div>
+				</div>
+
+				<!-- Available Widgets -->
+				<div class="card bg-base-100 shadow-xl">
+					<div class="card-body">
+						<h2 class="card-title text-2xl mb-4">Available Widgets</h2>
+
+						<div class="space-y-6">
+							<!-- Profile Widget -->
+							<div>
+								<h3 class="text-xl font-bold mb-2">📌 Profile Widget</h3>
+								<p class="opacity-70 mb-3">
+									Displays author information with avatar, stats, and social links.
+									Perfect for introducing yourself to readers.
+								</p>
+								<div class="mockup-code text-xs">
+									<pre><code>import Profile from "../components/widgets/Profile.astro";
+
+&lt;Profile /&gt;</code></pre>
+								</div>
+							</div>
+
+							<!-- Categories Widget -->
+							<div>
+								<h3 class="text-xl font-bold mb-2">📂 Categories Widget</h3>
+								<p class="opacity-70 mb-3">
+									Lists all post categories with count badges. Helps readers browse
+									content by topic.
+								</p>
+								<div class="mockup-code text-xs">
+									<pre><code>import Categories from "../components/widgets/Categories.astro";
+
+&lt;Categories maxDisplay={6} /&gt;</code></pre>
+								</div>
+							</div>
+
+							<!-- Tags Widget -->
+							<div>
+								<h3 class="text-xl font-bold mb-2">🏷️ Tags Widget</h3>
+								<p class="opacity-70 mb-3">
+									Displays popular tags in a compact badge format. Great for
+									content discovery.
+								</p>
+								<div class="mockup-code text-xs">
+									<pre><code>import Tags from "../components/widgets/Tags.astro";
+
+&lt;Tags maxDisplay={15} /&gt;</code></pre>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- How to Use -->
+				<div class="card bg-base-100 shadow-xl">
+					<div class="card-body">
+						<h2 class="card-title text-2xl mb-4">How to Use</h2>
+
+						<div class="space-y-4">
+							<div>
+								<h3 class="font-bold mb-2">1. Import the Widget</h3>
+								<div class="mockup-code text-xs">
+									<pre><code>import Profile from "../components/widgets/Profile.astro";</code></pre>
+								</div>
+							</div>
+
+							<div>
+								<h3 class="font-bold mb-2">2. Add to Your Layout</h3>
+								<p class="opacity-70 text-sm mb-2">
+									Place widgets in your sidebar or any other section:
+								</p>
+								<div class="mockup-code text-xs">
+									<pre><code>&lt;div class="sidebar"&gt;
+  &lt;Profile /&gt;
+  &lt;Categories /&gt;
+  &lt;Tags /&gt;
+&lt;/div&gt;</code></pre>
+								</div>
+							</div>
+
+							<div>
+								<h3 class="font-bold mb-2">3. Customize with Props</h3>
+								<p class="opacity-70 text-sm mb-2">
+									Most widgets accept optional props for customization:
+								</p>
+								<ul class="list-disc list-inside opacity-70 text-sm space-y-1">
+									<li>
+										<code class="badge badge-ghost badge-sm">class</code> - Custom CSS classes
+									</li>
+									<li>
+										<code class="badge badge-ghost badge-sm">maxDisplay</code> - Limit number of items
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Widget Features -->
+				<div class="card bg-base-100 shadow-xl">
+					<div class="card-body">
+						<h2 class="card-title text-2xl mb-4">Widget Features</h2>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+							<div class="flex gap-3">
+								<div class="text-3xl">✨</div>
+								<div>
+									<h3 class="font-bold mb-1">Zero Dependencies</h3>
+									<p class="text-sm opacity-70">
+										No external icon libraries needed, uses emoji and simple SVG
+									</p>
+								</div>
+							</div>
+
+							<div class="flex gap-3">
+								<div class="text-3xl">🎨</div>
+								<div>
+									<h3 class="font-bold mb-1">DaisyUI Styled</h3>
+									<p class="text-sm opacity-70">
+										Consistent styling with DaisyUI components
+									</p>
+								</div>
+							</div>
+
+							<div class="flex gap-3">
+								<div class="text-3xl">📱</div>
+								<div>
+									<h3 class="font-bold mb-1">Responsive Design</h3>
+									<p class="text-sm opacity-70">
+										Works perfectly on all screen sizes
+									</p>
+								</div>
+							</div>
+
+							<div class="flex gap-3">
+								<div class="text-3xl">⚡</div>
+								<div>
+									<h3 class="font-bold mb-1">Performance</h3>
+									<p class="text-sm opacity-70">
+										Optimized rendering and minimal overhead
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Right: Live Widgets -->
+			<div class="space-y-6">
+				<div class="text-xs font-bold opacity-50 px-2">LIVE PREVIEW</div>
+
+				<!-- Profile Widget -->
+				<Profile />
+
+				<!-- Categories Widget -->
+				<Categories maxDisplay={5} />
+
+				<!-- Tags Widget -->
+				<Tags maxDisplay={12} />
+			</div>
+		</div>
+
+		<!-- Bottom Feature Cards -->
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+			<div class="card bg-primary/10 border border-primary/20">
+				<div class="card-body">
+					<div class="text-4xl mb-3">📌</div>
+					<h3 class="card-title text-lg">Profile Widget</h3>
+					<p class="text-sm opacity-70">
+						Display author information with avatar, stats, and social links
+					</p>
+					<div class="card-actions">
+						<div class="badge badge-sm badge-outline">Author Info</div>
+						<div class="badge badge-sm badge-outline">Social Links</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card bg-secondary/10 border border-secondary/20">
+				<div class="card-body">
+					<div class="text-4xl mb-3">📂</div>
+					<h3 class="card-title text-lg">Categories Widget</h3>
+					<p class="text-sm opacity-70">
+						Browse posts by category with article counts and quick navigation
+					</p>
+					<div class="card-actions">
+						<div class="badge badge-sm badge-outline">Navigation</div>
+						<div class="badge badge-sm badge-outline">Filtering</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card bg-accent/10 border border-accent/20">
+				<div class="card-body">
+					<div class="text-4xl mb-3">🏷️</div>
+					<h3 class="card-title text-lg">Tags Widget</h3>
+					<p class="text-sm opacity-70">
+						Explore content through tags with compact badge design
+					</p>
+					<div class="card-actions">
+						<div class="badge badge-sm badge-outline">Tag Cloud</div>
+						<div class="badge badge-sm badge-outline">Discovery</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>

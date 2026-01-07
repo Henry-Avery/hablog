@@ -1,0 +1,19 @@
+[
+	{
+		"title": "henryavery.cn",
+		"description": "Personal blog built with Astro and Keystatic CMS",
+		"techStack": ["Astro", "Keystatic", "Tailwind", "DaisyUI"],
+		"status": "in-progress",
+		"demoUrl": "https://henryavery.cn",
+		"sourceUrl": ""
+	},
+	{
+		"title": "Example Project",
+		"description": "This is an example project. Replace with your own projects.",
+		"image": "",
+		"techStack": ["React", "TypeScript", "Next.js"],
+		"status": "completed",
+		"demoUrl": "https://example.com",
+		"sourceUrl": "https://github.com/username/repo"
+	}
+]

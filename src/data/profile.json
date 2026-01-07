@@ -1,0 +1,22 @@
+{
+  "name": "Henry Avery",
+  "avatar": "/avatar.jpg",
+  "bio": "Developer & Writer",
+  "links": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/yourusername",
+      "icon": "fa6-brands:github"
+    },
+    {
+      "name": "Email",
+      "url": "mailto:your.email@example.com",
+      "icon": "fa6-solid:envelope"
+    },
+    {
+      "name": "RSS",
+      "url": "/rss.xml",
+      "icon": "fa6-solid:rss"
+    }
+  ]
+}

@@ -1,22 +1,22 @@
 {
-  "title": "Home",
+  "title": "henryavery.cn",
   "hero": {
-    "heroImage": "/src/assets/images/pages/home/hero/heroImage.jpg",
-    "heroImageAlt": "Superman being bulletproof",
-    "heading": "Astro + Keystatic CMS Starter Template",
-    "subheading": "With Tailwind & DaisyUI",
-    "intro": "This is a starter template to get started quickly with Astro, Keystatic CMS, and Tailwind with DaisyUI.",
+    "heroImage": "/src/assets/images/pages/home/hero/heroImage.webp",
+    "heroImageAlt": "Henry Avery's Blog",
+    "heading": "小天也",
+    "subheading": "Life hacker",
+    "intro": "Welcome to my blog -sharing thoughts on tech, development, and life.\n\nDo not go gentle into that good night,\n不要温和地走进那个良夜，\n\nOld age should burn and rave at close of day;\n老人在日落时应当燃烧、怒吼；\n\nRage, rage against the dying of the light.\n怒斥、怒斥那光明的消歇。\n",
     "buttons": [
       {
-        "label": "Test Button 1",
-        "link": "#",
+        "label": "About Me",
+        "link": "/about",
         "style": "primary",
         "type": "outline",
         "size": "large"
       },
       {
-        "label": "Test Button 2",
-        "link": "#",
+        "label": "View Projects",
+        "link": "/projects",
         "style": "secondary",
         "type": "",
         "size": ""
@@ -25,6 +25,6 @@
   },
   "posts": {
     "heading": "Latest Posts",
-    "subheading": "All the latest news and stories."
+    "subheading": "Explore my recent writings and discoveries."
   }
 }

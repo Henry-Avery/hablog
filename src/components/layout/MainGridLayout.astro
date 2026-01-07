@@ -1,0 +1,114 @@
+---
+import Sidebar from './Sidebar.astro';
+import RightSidebar from './RightSidebar.astro';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+	class?: string;
+	/** Show left sidebar with Profile, Categories, Tags */
+	showLeftSidebar?: boolean;
+	/** Show right sidebar */
+	showRightSidebar?: boolean;
+	/** Show TOC in right sidebar (requires headings prop) */
+	showTOC?: boolean;
+	/** Show site stats in right sidebar */
+	showStats?: boolean;
+	/** Show calendar in right sidebar */
+	showCalendar?: boolean;
+	/** Headings for TOC */
+	headings?: MarkdownHeading[];
+}
+
+const {
+	class: className,
+	showLeftSidebar = false,
+	showRightSidebar = false,
+	showTOC = false,
+	showStats = false,
+	showCalendar = false,
+	headings,
+} = Astro.props;
+---
+
+<div class:list={["main-grid-layout", className]}>
+	{/* Left Sidebar */}
+	{showLeftSidebar && (
+		<Sidebar class="sidebar-column sidebar-left-column" />
+	)}
+
+	{/* Main Content */}
+	<main class="main-content">
+		<slot />
+	</main>
+
+	{/* Right Sidebar */}
+	{showRightSidebar && (
+		<RightSidebar
+			class="sidebar-column sidebar-right-column"
+			headings={headings}
+			showTOC={showTOC}
+			showStats={showStats}
+			showCalendar={showCalendar}
+		>
+			<slot name="right-sidebar" />
+		</RightSidebar>
+	)}
+</div>
+
+<style>
+	.main-grid-layout {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	.main-content {
+		min-width: 0; /* Prevents grid blowout */
+		width: 100%;
+	}
+
+	/* Single sidebar (right only) */
+	.main-grid-layout:has(.sidebar-right-column):not(:has(.sidebar-left-column)) {
+		grid-template-columns: 1fr 280px;
+	}
+
+	/* Single sidebar (left only) */
+	.main-grid-layout:has(.sidebar-left-column):not(:has(.sidebar-right-column)) {
+		grid-template-columns: 280px 1fr;
+	}
+
+	/* Dual sidebars */
+	.main-grid-layout:has(.sidebar-left-column):has(.sidebar-right-column) {
+		grid-template-columns: 280px 1fr 280px;
+	}
+
+	/* Tablet: Hide sidebars */
+	@media (max-width: 1024px) {
+		.main-grid-layout {
+			grid-template-columns: 1fr !important;
+		}
+
+		.sidebar-column {
+			display: none;
+		}
+	}
+
+	/* Large screens: Wider sidebars */
+	@media (min-width: 1400px) {
+		.main-grid-layout:has(.sidebar-left-column):has(.sidebar-right-column) {
+			grid-template-columns: 300px 1fr 300px;
+		}
+
+		.main-grid-layout:has(.sidebar-right-column):not(:has(.sidebar-left-column)),
+		.main-grid-layout:has(.sidebar-left-column):not(:has(.sidebar-right-column)) {
+			grid-template-columns: 1fr 300px;
+		}
+
+		.main-grid-layout:has(.sidebar-left-column):not(:has(.sidebar-right-column)) {
+			grid-template-columns: 300px 1fr;
+		}
+	}
+</style>

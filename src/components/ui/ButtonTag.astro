@@ -1,0 +1,32 @@
+---
+export interface Props {
+	href: string;
+	label?: string;
+	dot?: boolean;
+	count?: number;
+	class?: string;
+}
+
+const { href, label, dot = false, count, class: className } = Astro.props;
+---
+
+<a
+	href={href}
+	aria-label={label}
+	class:list={[
+		"badge badge-lg gap-2",
+		"transition-all duration-150",
+		"hover:badge-primary",
+		"active:scale-95",
+		"no-underline",
+		className
+	]}
+>
+	{dot && (
+		<span class="w-1.5 h-1.5 rounded-full bg-current opacity-60"></span>
+	)}
+	<slot />
+	{count !== undefined && (
+		<span class="opacity-60 text-xs">{count}</span>
+	)}
+</a>

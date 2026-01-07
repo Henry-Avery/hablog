@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Features Demo"
+  description="Showcase of all migrated features from Mizuki"
+>
+  <div class="container mx-auto px-4 py-16 max-w-4xl">
+    <h1 class="text-5xl font-bold mb-8 text-center">New Features Showcase</h1>
+
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">1. Gradient Buttons</h2>
+      <p class="mb-4 opacity-70">Beautiful gradient button styles migrated from Mizuki</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <button class="btn-gradient-primary" type="button">Primary Button</button>
+        <button class="btn-gradient-success" type="button">Success Button</button>
+        <button class="btn-gradient-warning" type="button">Warning Button</button>
+        <button class="btn-gradient-danger" type="button">Danger Button</button>
+        <button class="btn-gradient-info" type="button">Info Button</button>
+        <button class="btn-gradient-secondary" type="button">Secondary Button</button>
+      </div>
+    </section>
+
+    <section class="mb-16 mizuki-theme">
+      <h2 class="text-3xl font-bold mb-6">2. OKLCH Dynamic Color System</h2>
+      <p class="mb-4 opacity-70">Modern color system with light and dark mode support</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="mizuki-card">
+          <h3 class="text-xl font-bold mb-2">Mizuki Card</h3>
+          <p>OKLCH color system with smooth shadow effects.</p>
+        </div>
+
+        <div class="mizuki-card">
+          <h3 class="text-xl font-bold mb-2">Responsive Design</h3>
+          <p>Auto adapts to light and dark themes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">3. Markdown Callouts</h2>
+      <p class="mb-4 opacity-70">5 types of callout boxes for highlighting important information</p>
+
+      <div class="space-y-4 mb-4">
+        <div class="callout callout-note">
+          <div class="callout-title">Note</div>
+          <p>This is a note callout for general information.</p>
+        </div>
+
+        <div class="callout callout-tip">
+          <div class="callout-title">Tip</div>
+          <p>This is a tip callout for useful tips.</p>
+        </div>
+
+        <div class="callout callout-important">
+          <div class="callout-title">Important</div>
+          <p>This is an important callout for key information.</p>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">Warning</div>
+          <p>This is a warning callout for important matters.</p>
+        </div>
+
+        <div class="callout callout-caution">
+          <div class="callout-title">Caution</div>
+          <p>This is a caution callout for serious issues.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">4. Pagefind Full-Text Search</h2>
+      <p class="mb-4 opacity-70">Powerful static site search functionality</p>
+
+      <div class="flex gap-4 items-center flex-wrap">
+        <a href="/search" class="btn btn-primary btn-lg">Go to Search Page</a>
+        <div class="alert">
+          <span>Or click the search icon in the navbar</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">5. Math Formula Support</h2>
+      <p class="mb-4 opacity-70">Use LaTeX syntax in Markdown with KaTeX</p>
+
+      <div class="card bg-base-200">
+        <div class="card-body">
+          <h3 class="card-title">Example Formulas</h3>
+          <p>You can use inline and block formulas in articles</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">6. GitHub OAuth Authentication</h2>
+      <p class="mb-4 opacity-70">Protect your content management system</p>
+
+      <div class="alert alert-info">
+        <div>
+          <h3 class="font-bold">Available after GitHub OAuth configuration</h3>
+          <div class="text-sm">Visit /keystatic for content management</div>
+          <div class="text-sm">See GITHUB_OAUTH_SETUP.md for configuration steps</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="card bg-gradient-to-br from-primary to-secondary text-primary-content">
+        <div class="card-body">
+          <h2 class="card-title text-2xl">Migration Complete!</h2>
+          <p>All features migrated from Mizuki are now available</p>
+          <ul class="list-disc list-inside space-y-2 mt-4">
+            <li>Gradient button style system</li>
+            <li>OKLCH dynamic colors</li>
+            <li>Markdown Callouts</li>
+            <li>KaTeX math formulas</li>
+            <li>Pagefind full-text search</li>
+            <li>GitHub OAuth authentication</li>
+            <li>Custom scrollbar</li>
+            <li>PostCSS + Stylus support</li>
+          </ul>
+          <div class="card-actions justify-end mt-4">
+            <a href="/" class="btn btn-ghost">Back to Home</a>
+            <a href="/posts" class="btn btn-ghost">View Posts</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-3xl font-bold mb-6">Related Documentation</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card bg-base-200 hover:bg-base-300 transition">
+          <div class="card-body">
+            <h3 class="card-title text-lg">Quick Start</h3>
+            <p class="text-sm">QUICK_START.md</p>
+          </div>
+        </div>
+
+        <div class="card bg-base-200 hover:bg-base-300 transition">
+          <div class="card-body">
+            <h3 class="card-title text-lg">Deployment Guide</h3>
+            <p class="text-sm">EDGEONE_DEPLOYMENT.md</p>
+          </div>
+        </div>
+
+        <div class="card bg-base-200 hover:bg-base-300 transition">
+          <div class="card-body">
+            <h3 class="card-title text-lg">OAuth Configuration</h3>
+            <p class="text-sm">GITHUB_OAUTH_SETUP.md</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  button {
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+</style>

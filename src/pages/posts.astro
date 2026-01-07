@@ -1,18 +1,21 @@
 ---
 import Layout from '@layouts/Layout.astro'
 import PostsComponent from '@components/Posts.astro'
+import MainGridLayout from '@components/layout/MainGridLayout.astro'
 ---
 
-<Layout title="Keystatic & Astro's Content Collections">
-  <section>
-    <div class="container mx-auto my-10 max-w-screen-2xl px-3">
-      <header class="space-y-3 text-center">
-        <h2 class="text-5xl font-bold">Posts</h2>
-        <p>Explore our latest posts</p>
-      </header>
-      <div class="mt-10">
-        <PostsComponent maxPosts={3} />
-      </div>
+<Layout title="Posts - henryavery.cn">
+  <section class="py-10">
+    <div class="container mx-auto">
+      <MainGridLayout showLeftSidebar={true}>
+        <div class="space-y-10">
+          <header class="space-y-3 text-center">
+            <h2 class="text-5xl font-bold">Posts</h2>
+            <p>Explore all posts</p>
+          </header>
+          <PostsComponent maxPosts={100} />
+        </div>
+      </MainGridLayout>
     </div>
   </section>
 </Layout>

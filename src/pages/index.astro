@@ -2,20 +2,29 @@
 import Layout from '@layouts/Layout.astro'
 import Posts from '@components/Posts.astro'
 import Hero from '@components/Hero.astro'
+import MainGridLayout from '@components/layout/MainGridLayout.astro'
 
 import pageData from '@content/pages/home.json'
 ---
 <Layout title={pageData?.title}>
   <Hero />
+
   <section class="bg-base-100 py-10">
-    <div class="container mx-auto my-10 max-w-screen-2xl px-3">
-      <header class="space-y-3 text-center">
-        <h2 class="text-5xl font-bold">{pageData?.posts.heading}</h2>
-        <p>{pageData?.posts.subheading}</p>
-      </header>
-      <div class="mt-10">
-        <Posts maxPosts={3} />
-      </div>
+    <div class="container mx-auto">
+      <MainGridLayout
+        showLeftSidebar={true}
+        showRightSidebar={true}
+        showStats={true}
+        showCalendar={true}
+      >
+        <div class="space-y-10">
+          <header class="space-y-3 text-center">
+            <h2 class="text-5xl font-bold">{pageData?.posts.heading}</h2>
+            <p>{pageData?.posts.subheading}</p>
+          </header>
+          <Posts maxPosts={6} />
+        </div>
+      </MainGridLayout>
     </div>
   </section>
 </Layout>

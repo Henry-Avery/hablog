@@ -1,0 +1,54 @@
+---
+import Profile from '../widget/Profile.astro';
+import Categories from '../widget/Categories.astro';
+import Tags from '../widget/Tags.astro';
+
+interface Props {
+	class?: string;
+}
+
+const className = Astro.props.class;
+---
+
+<aside class:list={["sidebar-left", className]}>
+	<!-- Top section (scrolls with page) -->
+	<div class="sidebar-top">
+		<Profile />
+	</div>
+
+	<!-- Sticky section (stays visible while scrolling) -->
+	<div class="sidebar-sticky">
+		<Categories />
+		<Tags />
+	</div>
+</aside>
+
+<style>
+	.sidebar-left {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		width: 100%;
+	}
+
+	.sidebar-top {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.sidebar-sticky {
+		position: sticky;
+		top: 5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	/* Hide on mobile and tablet */
+	@media (max-width: 1024px) {
+		.sidebar-left {
+			display: none;
+		}
+	}
+</style>

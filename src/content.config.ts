@@ -8,7 +8,10 @@ const posts = defineCollection({
     z.object({
       title: z.string(),
       featuredImage: image().optional(),
-      imageAlt: z.string().optional(),
+      imgAlt: z.string().optional(),
+      imageAlt: z.string().optional(), // 兼容旧字段名
+      excerpt: z.string().optional(),
+      publishedDate: z.date().optional(),
     }),
 })
 

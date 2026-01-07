@@ -1,0 +1,41 @@
+# Pagefind Configuration
+# https://pagefind.app/docs/config-options/
+
+site: dist
+
+glob: '**/*.html'
+
+source:
+  language: 'en'
+  # Add more languages if needed: ['en', 'zh-CN']
+
+output_subdir: _pagefind
+
+exclude_selectors:
+  - 'nav'
+  - 'header .navbar'
+  - 'footer'
+  - '.no-index'
+  - 'span.katex'
+  - 'span.katex-display'
+  - '[data-pagefind-ignore]'
+  - '.search-panel'
+  - '#search-panel'
+
+force_language: 'en'
+
+bundle_dir: _pagefind
+
+ranking:
+  page_length: 1.0
+
+highlighting:
+  algorithm: 'bm25'
+
+indexing:
+  root_selector: 'body'
+  # Customize which sections to index
+  exclude_selectors:
+    - 'script'
+    - 'style'
+    - 'noscript'

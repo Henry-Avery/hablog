@@ -1,0 +1,113 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MainGridLayout from "../components/layout/MainGridLayout.astro";
+---
+
+<Layout title="About" description="About this blog">
+	<div class="container mx-auto py-16">
+		<MainGridLayout showLeftSidebar={true}>
+			<div class="card bg-base-100 shadow-xl">
+				<div class="card-body">
+					<h1 class="text-4xl font-bold mb-6">About This Blog</h1>
+
+					<div class="prose max-w-none">
+						<h2 class="text-2xl font-bold mt-6 mb-3">Welcome!</h2>
+						<p class="mb-4">
+							This is a modern blog built with cutting-edge web technologies.
+							It combines the power of Astro, Tailwind CSS, and Keystatic CMS
+							to deliver a fast, beautiful, and easy-to-manage blogging experience.
+						</p>
+
+						<h2 class="text-2xl font-bold mt-6 mb-3">Tech Stack</h2>
+						<ul class="list-disc list-inside mb-4 space-y-2">
+							<li><strong>Astro</strong> - Lightning-fast static site generator</li>
+							<li><strong>Tailwind CSS v4</strong> - Modern utility-first CSS framework</li>
+							<li><strong>DaisyUI</strong> - Beautiful component library</li>
+							<li><strong>Keystatic CMS</strong> - Git-based content management</li>
+							<li><strong>Markdoc</strong> - Powerful Markdown renderer</li>
+							<li><strong>Pagefind</strong> - Fast static site search</li>
+						</ul>
+
+						<h2 class="text-2xl font-bold mt-6 mb-3">Features</h2>
+						<ul class="list-disc list-inside mb-4 space-y-2">
+							<li>Fast performance with static site generation</li>
+							<li>Beautiful gradient buttons and OKLCH color system</li>
+							<li>Markdown callouts for rich content</li>
+							<li>Math formula support with KaTeX</li>
+							<li>Full-text search with Pagefind</li>
+							<li>GitHub OAuth authentication</li>
+							<li>Responsive design for all devices</li>
+						</ul>
+
+						<h2 class="text-2xl font-bold mt-6 mb-3">About the Author</h2>
+						<p class="mb-4">
+							I'm a developer passionate about creating beautiful and functional
+							web applications. This blog is a showcase of modern web development
+							practices and a place to share knowledge and experiences.
+						</p>
+
+						<h2 class="text-2xl font-bold mt-6 mb-3">Get in Touch</h2>
+						<p class="mb-4">
+							Feel free to reach out through:
+						</p>
+						<ul class="list-disc list-inside mb-4 space-y-2">
+							<li>GitHub: <a href="https://github.com" class="link link-primary">@yourname</a></li>
+							<li>Twitter: <a href="https://twitter.com" class="link link-primary">@yourname</a></li>
+							<li>Email: your.email@example.com</li>
+						</ul>
+
+						<hr class="my-8 border-base-300">
+
+						<p class="text-sm opacity-70">
+							Last updated: January 2026
+						</p>
+					</div>
+				</div>
+			</div>
+		</MainGridLayout>
+	</div>
+</Layout>
+
+<style>
+	.prose h1 {
+		font-size: 2.25rem;
+		font-weight: 700;
+		margin-bottom: 1.5rem;
+	}
+
+	.prose h2 {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.prose p {
+		margin-bottom: 1rem;
+		line-height: 1.7;
+	}
+
+	.prose ul {
+		margin-bottom: 1rem;
+	}
+
+	.prose a {
+		color: oklch(var(--p));
+		text-decoration: underline;
+	}
+
+	.prose a:hover {
+		opacity: 0.8;
+	}
+
+	.prose strong {
+		font-weight: 600;
+		color: oklch(var(--p));
+	}
+
+	.prose hr {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		border-color: oklch(var(--bc) / 0.2);
+	}
+</style>

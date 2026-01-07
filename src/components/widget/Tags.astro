@@ -1,0 +1,63 @@
+---
+import WidgetLayout from './WidgetLayout.astro';
+import ButtonTag from '../ui/ButtonTag.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+
+// TODO: Add tags field to posts schema
+// For now, create placeholder tags
+const placeholderTags = [
+	{ name: 'Astro', count: 2 },
+	{ name: 'Web Development', count: posts.length },
+	{ name: 'Tutorial', count: 1 },
+];
+
+const COLLAPSED_HEIGHT = '120px';
+
+interface Props {
+	class?: string;
+	isCollapsed?: boolean;
+}
+
+const { class: className, isCollapsed = true } = Astro.props;
+---
+
+<WidgetLayout
+	id="tags-widget"
+	name="Tags"
+	class={className}
+	isCollapsed={isCollapsed}
+	collapsedHeight={COLLAPSED_HEIGHT}
+>
+	<div class="flex flex-wrap gap-2">
+		{placeholderTags.map((tag) => (
+			<ButtonTag
+				href={`/tags/${encodeURIComponent(tag.name.toLowerCase())}`}
+				label={`View all posts with the ${tag.name} tag`}
+				count={tag.count}
+			>
+				{tag.name}
+			</ButtonTag>
+		))}
+	</div>
+</WidgetLayout>
+
+<!--
+To add tags support:
+1. Update src/cms/collections/posts.ts to add tags field:
+   tags: fields.multiselect({
+     label: 'Tags',
+     options: [
+       { label: 'Astro', value: 'astro' },
+       { label: 'Web Development', value: 'web-development' },
+       { label: 'Tutorial', value: 'tutorial' },
+       { label: 'JavaScript', value: 'javascript' },
+       { label: 'TypeScript', value: 'typescript' },
+     ]
+   })
+
+2. Create src/pages/tags/[tag].astro for tag pages
+
+3. Update this component to dynamically count posts per tag from actual post data
+-->

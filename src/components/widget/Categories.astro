@@ -1,0 +1,51 @@
+---
+import WidgetLayout from './WidgetLayout.astro';
+import ButtonLink from '../ui/ButtonLink.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+
+// TODO: Add category field to posts schema
+// For now, create placeholder categories
+const placeholderCategories = [
+	{ name: 'Blog', count: posts.length, url: '/posts' },
+];
+
+interface Props {
+	class?: string;
+}
+
+const className = Astro.props.class;
+---
+
+<WidgetLayout id="categories-widget" name="Categories" class={className}>
+	<div class="flex flex-col">
+		{placeholderCategories.map((category) => (
+			<ButtonLink
+				url={category.url}
+				badge={String(category.count)}
+				label={`View all posts in the ${category.name} category`}
+			>
+				{category.name}
+			</ButtonLink>
+		))}
+	</div>
+</WidgetLayout>
+
+<!--
+To add categories support:
+1. Update src/cms/collections/posts.ts to add category field:
+   category: fields.select({
+     label: 'Category',
+     options: [
+       { label: 'Blog', value: 'blog' },
+       { label: 'Tutorial', value: 'tutorial' },
+       { label: 'Projects', value: 'projects' },
+     ],
+     defaultValue: 'blog'
+   })
+
+2. Create src/pages/category/[category].astro for category pages
+
+3. Update this component to dynamically count posts per category
+-->

@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Search | Astrokeys"
+  description="Search the site"
+>
+  <div class="container mx-auto px-4 py-16">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-8">Search</h1>
+      <div id="search-container"></div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // @ts-ignore
+  import * as pagefind from '/_pagefind/pagefind.js';
+
+  async function initSearch() {
+    await pagefind.init();
+
+    const searchContainer = document.getElementById('search-container');
+    if (!searchContainer) return;
+
+    // Create search input
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Search...';
+    searchInput.className = 'input input-bordered w-full mb-6';
+    searchContainer.appendChild(searchInput);
+
+    // Create results container
+    const resultsContainer = document.createElement('div');
+    resultsContainer.id = 'results';
+    resultsContainer.className = 'space-y-4';
+    searchContainer.appendChild(resultsContainer);
+
+    // Search function
+    let debounceTimer: NodeJS.Timeout;
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(async () => {
+        const query = (e.target as HTMLInputElement).value;
+
+        if (!query || query.length < 2) {
+          resultsContainer.innerHTML = '';
+          return;
+        }
+
+        const results = await pagefind.search(query);
+
+        resultsContainer.innerHTML = '';
+
+        if (results.results.length === 0) {
+          resultsContainer.innerHTML = '<p class="text-gray-500">No results found.</p>';
+          return;
+        }
+
+        for (const result of results.results) {
+          const data = await result.data();
+
+          const resultCard = document.createElement('a');
+          resultCard.href = data.url;
+          resultCard.className = 'card bg-base-200 hover:bg-base-300 transition-colors p-6 block';
+
+          resultCard.innerHTML = `
+            <h2 class="card-title text-xl mb-2">${data.meta.title || 'Untitled'}</h2>
+            <p class="text-gray-600 mb-2">${data.excerpt}</p>
+            <span class="text-sm text-primary">${data.url}</span>
+          `;
+
+          resultsContainer.appendChild(resultCard);
+        }
+      }, 300);
+    });
+  }
+
+  // Initialize search when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearch);
+  } else {
+    initSearch();
+  }
+</script>

@@ -1,14 +1,53 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content'
 import Layout from '@layouts/Layout.astro'
+import MainGridLayout from '@components/layout/MainGridLayout.astro'
 import { Image } from 'astro:assets'
+import fs from 'fs'
+import path from 'path'
 
 const { slug } = Astro.params
-if (!slug) throw new Error('Slug not found')
+
+// Handle invalid slugs
+if (!slug || slug === 'undefined') {
+  return Astro.redirect('/posts')
+}
+
 const post = await getEntry('posts', slug)
 
-if (!post) throw new Error('No post found for this slug')
-const { Content } = await render(post)
+if (!post) {
+  return Astro.redirect('/posts')
+}
+
+const { Content, headings } = await render(post)
+
+// Check if featured image exists
+let imageExists = false
+let featuredImage = null
+
+if (post.data.featuredImage) {
+  try {
+    // Try to resolve the image path
+    const imagePath = post.data.featuredImage.src || post.data.featuredImage
+
+    // If it's a relative path, check if file exists
+    if (typeof imagePath === 'string' && imagePath.startsWith('../')) {
+      const fullPath = path.join(process.cwd(), 'src', imagePath.replace('../', ''))
+      imageExists = fs.existsSync(fullPath)
+    } else {
+      // If it's already an imported image object, it exists
+      imageExists = true
+    }
+
+    if (imageExists) {
+      featuredImage = post.data.featuredImage
+    }
+  } catch (error) {
+    // Image doesn't exist or can't be loaded, skip it
+    console.warn(`⚠️  Featured image not found for post: ${slug}`)
+    imageExists = false
+  }
+}
 
 // Generate static pages
 export async function getStaticPaths() {
@@ -18,13 +57,34 @@ export async function getStaticPaths() {
 ---
 
 <Layout title={post.data.title}>
-  <div class="container mx-auto max-w-screen-xl p-6">
-    <article class="prose max-w-none">
-      {post.data.featuredImage && (
-        <Image src={post.data.featuredImage} alt={post?.data?.imageAlt || 'Featured Image'} width={1000} height={500} class="object-cover w-full" />
-      )}
-      <h1 class="text-5xl font-bold">{post.data.title}</h1>
-      <Content />
-    </article>
+  <div class="container mx-auto py-6">
+    <MainGridLayout
+      showLeftSidebar={true}
+      showRightSidebar={true}
+      showTOC={headings.length > 0}
+      headings={headings}
+    >
+      <article class="prose max-w-none" data-pagefind-body>
+        {imageExists && featuredImage && (
+          <Image
+            src={featuredImage}
+            alt={post?.data?.imageAlt || 'Featured Image'}
+            width={1000}
+            height={500}
+            class="object-cover w-full rounded-lg"
+            data-pagefind-ignore
+          />
+        )}
+        <h1 class="text-5xl font-bold">{post.data.title}</h1>
+        <div class="text-sm opacity-60 mb-6">
+          Published on {post.data.publishedDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </div>
+        <Content />
+      </article>
+    </MainGridLayout>
   </div>
 </Layout>

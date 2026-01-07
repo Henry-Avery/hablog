@@ -1,0 +1,128 @@
+---
+// TOC Widget - 简洁版目录
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+	headings?: MarkdownHeading[];
+	class?: string;
+}
+
+const { headings = [], class: className = "" } = Astro.props;
+
+if (headings.length === 0) {
+	return null;
+}
+
+// 找到最小标题层级
+let minDepth = 6;
+for (const heading of headings) {
+	minDepth = Math.min(minDepth, heading.depth);
+}
+
+// 只显示前3级标题
+const formattedHeadings = headings
+	.filter((h) => h.depth <= minDepth + 2)
+	.map((h) => ({
+		...h,
+		level: h.depth - minDepth,
+	}));
+---
+
+<div class:list={["card bg-base-100 shadow-xl border border-base-300 sticky top-24", className]}>
+	<div class="card-body p-5">
+		<h2 class="card-title text-lg mb-2">
+			<span>📑</span>
+			On This Page
+		</h2>
+
+		<nav class="toc-nav space-y-1">
+			{formattedHeadings.map((heading) => (
+				<a
+					href={`#${heading.slug}`}
+					class="toc-link block py-1 text-sm hover:text-primary transition-colors"
+					style={`padding-left: ${heading.level * 12}px`}
+					data-heading-id={heading.slug}
+				>
+					{heading.text}
+				</a>
+			))}
+		</nav>
+	</div>
+</div>
+
+<script>
+	function initTOC() {
+		const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+
+		// 平滑滚动
+		tocLinks.forEach((link) => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				const id = link.getAttribute('data-heading-id');
+				const target = id ? document.getElementById(id) : null;
+
+				if (target) {
+					const navbarHeight = 80;
+					const targetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+					window.scrollTo({
+						top: targetTop,
+						behavior: 'smooth',
+					});
+				}
+			});
+		});
+
+		// 高亮当前章节
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					const id = entry.target.id;
+					const link = document.querySelector<HTMLAnchorElement>(
+						`.toc-link[data-heading-id="${id}"]`
+					);
+
+					if (link && entry.isIntersecting) {
+						tocLinks.forEach((l) => l.classList.remove('text-primary', 'font-semibold'));
+						link.classList.add('text-primary', 'font-semibold');
+					}
+				});
+			},
+			{
+				rootMargin: '-100px 0px -80% 0px',
+			}
+		);
+
+		// 观察所有标题
+		const headings = Array.from(tocLinks).map((link) => {
+			const id = link.getAttribute('data-heading-id');
+			return id ? document.getElementById(id) : null;
+		}).filter(Boolean) as HTMLElement[];
+
+		headings.forEach((heading) => observer.observe(heading));
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initTOC);
+	} else {
+		initTOC();
+	}
+
+	document.addEventListener('astro:page-load', initTOC);
+</script>
+
+<style>
+	.toc-nav {
+		max-height: 60vh;
+		overflow-y: auto;
+	}
+
+	.toc-nav::-webkit-scrollbar {
+		width: 3px;
+	}
+
+	.toc-nav::-webkit-scrollbar-thumb {
+		background: oklch(var(--bc) / 0.2);
+		border-radius: 2px;
+	}
+</style>

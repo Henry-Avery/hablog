@@ -1,0 +1,65 @@
+---
+export interface Props {
+	project: {
+		title: string;
+		description: string;
+		image?: string;
+		techStack: string[];
+		status: "completed" | "in-progress" | "planned";
+		demoUrl?: string;
+		sourceUrl?: string;
+	};
+}
+
+const { project } = Astro.props;
+
+const statusStyles = {
+	completed: "badge-success",
+	"in-progress": "badge-warning",
+	planned: "badge-ghost"
+};
+
+const statusText = {
+	completed: "Completed",
+	"in-progress": "In Progress",
+	planned: "Planned"
+};
+---
+
+<div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all">
+	{project.image && (
+		<figure>
+			<img src={project.image} alt={project.title} class="w-full h-48 object-cover" />
+		</figure>
+	)}
+	<div class="card-body">
+		<div class="flex justify-between items-start">
+			<h3 class="card-title">{project.title}</h3>
+			<span class={`badge ${statusStyles[project.status]}`}>
+				{statusText[project.status]}
+			</span>
+		</div>
+		<p class="text-sm opacity-70">{project.description}</p>
+
+		{project.techStack.length > 0 && (
+			<div class="flex flex-wrap gap-2 mt-2">
+				{project.techStack.map((tech) => (
+					<span class="badge badge-sm">{tech}</span>
+				))}
+			</div>
+		)}
+
+		<div class="card-actions justify-end mt-4">
+			{project.demoUrl && (
+				<a href={project.demoUrl} target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+					Demo
+				</a>
+			)}
+			{project.sourceUrl && (
+				<a href={project.sourceUrl} target="_blank" rel="noopener" class="btn btn-sm btn-ghost">
+					Source
+				</a>
+			)}
+		</div>
+	</div>
+</div>

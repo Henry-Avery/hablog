@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArchivePanel from '../components/ArchivePanel.svelte';
+import MainGridLayout from '../components/layout/MainGridLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+
+// Convert to the format expected by ArchivePanel
+const formattedPosts = posts.map(post => ({
+	id: post.id,
+	data: {
+		title: post.data.title,
+		publishedDate: post.data.publishedDate
+	}
+}));
+
+const totalPosts = posts.length;
+---
+
+<Layout title="Archive" description="All blog posts archived by year">
+	<div class="container mx-auto py-16">
+		<MainGridLayout showLeftSidebar={true}>
+			<div class="space-y-8">
+				<div class="mb-12">
+					<h1 class="text-5xl font-bold mb-4">Archive</h1>
+					<p class="opacity-70">
+						Total {totalPosts} post{totalPosts !== 1 ? 's' : ''}
+					</p>
+				</div>
+
+				<ArchivePanel posts={formattedPosts} client:load />
+
+				{totalPosts === 0 && (
+					<div class="text-center py-12">
+						<p class="opacity-50">No posts yet.</p>
+					</div>
+				)}
+			</div>
+		</MainGridLayout>
+	</div>
+</Layout>
