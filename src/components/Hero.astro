@@ -1,9 +1,7 @@
 ---
 import Button from '@components/ui/Button.tsx'
 
-
 import pageData from '@content/pages/home.json'
-import { Image } from 'astro:assets'
 const buttons = pageData?.hero?.buttons || []
 
 ---
@@ -51,15 +49,12 @@ const buttons = pageData?.hero?.buttons || []
 
         <div class="w-1/2">
           {
-            Image && (
-              <Image
+            pageData.hero.heroImage && (
+              <img
                 src={pageData.hero.heroImage}
                 alt={pageData?.hero?.heroImageAlt || 'Hero Image'}
                 class="h-full w-full object-cover"
                 loading="lazy"
-                width={500}
-                height={500}
-                placeholder="blurred"
               />
             )
           }
