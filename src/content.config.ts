@@ -12,6 +12,9 @@ const posts = defineCollection({
       imageAlt: z.string().optional(), // 兼容旧字段名
       excerpt: z.string().optional(),
       publishedDate: z.date().optional(),
+      tags: z.array(z.string()).optional().default([]),
+      category: z.string().optional().default('Other'),
+      draft: z.boolean().optional().default(false),
     }),
 })
 

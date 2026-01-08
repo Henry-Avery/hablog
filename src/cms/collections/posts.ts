@@ -40,5 +40,36 @@ export const posts = collection({
       label: "Published date",
       description: "The date this post was published"
     }),
+
+    tags: fields.array(
+      fields.text({ label: 'Tag' }),
+      {
+        label: 'Tags',
+        description: 'Add tags to categorize this post',
+        itemLabel: props => props.value || 'Tag'
+      }
+    ),
+
+    category: fields.select({
+      label: 'Category',
+      description: 'Select a primary category for this post',
+      options: [
+        { label: 'Technology', value: 'Technology' },
+        { label: 'Programming', value: 'Programming' },
+        { label: 'Web Development', value: 'Web Development' },
+        { label: 'Tutorial', value: 'Tutorial' },
+        { label: 'Design', value: 'Design' },
+        { label: 'Research', value: 'Research' },
+        { label: 'Personal', value: 'Personal' },
+        { label: 'Other', value: 'Other' },
+      ],
+      defaultValue: 'Other'
+    }),
+
+    draft: fields.checkbox({
+      label: 'Draft',
+      description: 'Mark this post as a draft (will not appear on the site)',
+      defaultValue: false
+    }),
   },
 });

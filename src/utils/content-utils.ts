@@ -8,8 +8,8 @@ async function getRawSortedPosts() {
 
 	const sorted = allBlogPosts.sort((a, b) => {
 		// 按发布日期排序（新的在前）
-		const dateA = new Date(a.data.published);
-		const dateB = new Date(b.data.published);
+		const dateA = new Date(a.data.publishedDate);
+		const dateB = new Date(b.data.publishedDate);
 		return dateA > dateB ? -1 : 1;
 	});
 	return sorted;

@@ -3,12 +3,14 @@ import { Image } from 'astro:assets'
 import { getCollection, getEntry } from 'astro:content'
 
 export interface Props {
+  posts?: any[]  // Accept pre-filtered posts
   maxPosts?: number
 }
 
-const { maxPosts = 3 }: Props = Astro.props
+const { posts: providedPosts, maxPosts = 3 }: Props = Astro.props
 
-const posts = await getCollection('posts')
+// Use provided posts or fetch all
+const posts = providedPosts || await getCollection('posts')
 
 ---
 <ul class="flex flex-wrap items-stretch justify-center gap-6">

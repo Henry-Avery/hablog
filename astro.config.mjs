@@ -38,6 +38,11 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@utils': '/src/utils',
+      },
+    },
     build: {
       rollupOptions: {
         external: ['/_pagefind/pagefind.js']

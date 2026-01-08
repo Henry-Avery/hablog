@@ -86,6 +86,27 @@ export async function getStaticPaths() {
             day: 'numeric'
           })}
         </div>
+
+        <!-- Category and Tags Display -->
+        <div class="flex flex-wrap gap-2 mb-6 not-prose">
+          {post.data.category && (
+            <a
+              href={`/posts?category=${encodeURIComponent(post.data.category)}`}
+              class="badge badge-lg badge-primary"
+            >
+              📂 {post.data.category}
+            </a>
+          )}
+          {post.data.tags && post.data.tags.length > 0 && post.data.tags.map(tag => (
+            <a
+              href={`/posts?tag=${encodeURIComponent(tag)}`}
+              class="badge badge-lg badge-outline badge-primary hover:badge-primary transition-colors"
+            >
+              🏷️ {tag}
+            </a>
+          ))}
+        </div>
+
         <Content />
       </article>
     </MainGridLayout>
