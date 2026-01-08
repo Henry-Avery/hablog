@@ -1,7 +1,7 @@
 {
   "title": "henryavery.cn",
   "hero": {
-    "heroImage": "/src/assets/images/pages/home/hero/heroImage.webp",
+    "heroImage": "../../assets/images/pages/home/hero/heroImage.webp",
     "heroImageAlt": "Henry Avery's Blog",
     "heading": "小天也",
     "subheading": "Life hacker",
