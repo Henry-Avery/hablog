@@ -73,19 +73,12 @@
       }
     },
     {
-      "text": "Dropdown Menu",
+      "text": "藏书馆",
       "isDropdown": {
-        "discriminant": true,
-        "value": [
-          {
-            "text": "1",
-            "link": "#"
-          },
-          {
-            "text": "2",
-            "link": "#"
-          }
-        ]
+        "discriminant": false,
+        "value": {
+          "link": "/library"
+        }
       }
     }
   ],

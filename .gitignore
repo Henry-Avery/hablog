@@ -23,4 +23,5 @@ pnpm-debug.log*
 .astro
 
 # Embedded repositories
-mizuki/
+mizuki/my-digital-library/
+my-digital-library/
