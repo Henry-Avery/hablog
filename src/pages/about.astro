@@ -10,61 +10,115 @@ import MainGridLayout from "../components/layout/MainGridLayout.astro";
 				<div class="card-body">
 					<h1 class="text-4xl font-bold mb-6">About This Blog</h1>
 
-					<div class="prose max-w-none">
-						<h2 class="text-2xl font-bold mt-6 mb-3">Welcome!</h2>
-						<p class="mb-4">
-							This is a modern blog built with cutting-edge web technologies.
-							It combines the power of Astro, Tailwind CSS, and Keystatic CMS
-							to deliver a fast, beautiful, and easy-to-manage blogging experience.
-						</p>
-
-						<h2 class="text-2xl font-bold mt-6 mb-3">Tech Stack</h2>
-						<ul class="list-disc list-inside mb-4 space-y-2">
-							<li><strong>Astro</strong> - Lightning-fast static site generator</li>
-							<li><strong>Tailwind CSS v4</strong> - Modern utility-first CSS framework</li>
-							<li><strong>DaisyUI</strong> - Beautiful component library</li>
-							<li><strong>Keystatic CMS</strong> - Git-based content management</li>
-							<li><strong>Markdoc</strong> - Powerful Markdown renderer</li>
-							<li><strong>Pagefind</strong> - Fast static site search</li>
-						</ul>
-
-						<h2 class="text-2xl font-bold mt-6 mb-3">Features</h2>
-						<ul class="list-disc list-inside mb-4 space-y-2">
-							<li>Fast performance with static site generation</li>
-							<li>Beautiful gradient buttons and OKLCH color system</li>
-							<li>Markdown callouts for rich content</li>
-							<li>Math formula support with KaTeX</li>
-							<li>Full-text search with Pagefind</li>
-							<li>GitHub OAuth authentication</li>
-							<li>Responsive design for all devices</li>
-						</ul>
-
-						<h2 class="text-2xl font-bold mt-6 mb-3">About the Author</h2>
-						<p class="mb-4">
-							I'm a developer passionate about creating beautiful and functional
-							web applications. This blog is a showcase of modern web development
-							practices and a place to share knowledge and experiences.
-						</p>
-
-						<h2 class="text-2xl font-bold mt-6 mb-3">Get in Touch</h2>
-						<p class="mb-4">
-							Feel free to reach out through:
-						</p>
-						<ul class="list-disc list-inside mb-4 space-y-2">
-							<li>GitHub: <a href="https://github.com" class="link link-primary">@yourname</a></li>
-							<li>Twitter: <a href="https://twitter.com" class="link link-primary">@yourname</a></li>
-							<li>Email: your.email@example.com</li>
-						</ul>
-
-						<hr class="my-8 border-base-300">
-
-						<p class="text-sm opacity-70">
-							Last updated: January 2026
-						</p>
-					</div>
-				</div>
-			</div>
-		</MainGridLayout>
+	<div class="prose max-w-none">
+	    <h2 class="text-2xl font-bold mt-6 mb-3">Welcome!</h2>
+	    <p class="mb-4">
+	        This is a modern blog built with cutting-edge web technologies.
+	        It combines the power of Astro, Tailwind CSS, and Keystatic CMS
+	        to deliver a fast, beautiful, and easy-to-manage blogging experience.
+	    </p>
+	
+	    <h2 class="text-2xl font-bold mt-6 mb-3">Tech Stack</h2>
+	    <ul class="list-disc list-inside mb-4 space-y-2">
+	        <li><strong>Astro</strong> - Lightning-fast static site generator</li>
+	        <li><strong>Tailwind CSS v4</strong> - Modern utility-first CSS framework</li>
+	        <li><strong>DaisyUI</strong> - Beautiful component library</li>
+	        <li><strong>Keystatic CMS</strong> - Git-based content management</li>
+	        <li><strong>Markdoc</strong> - Powerful Markdown renderer</li>
+	        <li><strong>Pagefind</strong> - Fast static site search</li>
+	    </ul>
+	
+	    <h2 class="text-2xl font-bold mt-6 mb-3">Features</h2>
+	    <ul class="list-disc list-inside mb-4 space-y-2">
+	        <li>Fast performance with static site generation</li>
+	        <li>Beautiful gradient buttons and OKLCH color system</li>
+	        <li>Markdown callouts for rich content</li>
+	        <li>Math formula support with KaTeX</li>
+	        <li>Full-text search with Pagefind</li>
+	        <li>GitHub OAuth authentication</li>
+	        <li>Responsive design for all devices</li>
+	    </ul>
+	
+	    <h2 class="text-2xl font-bold mt-10 mb-6">Education & Experience</h2>
+	    <div class="not-prose mb-10">
+	        <ul class="timeline timeline-vertical">
+	            <li>
+	                <div class="timeline-start font-mono opacity-70">2023 - 2026</div>
+	                <div class="timeline-middle">
+	                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-primary"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+	                </div>
+	                <div class="timeline-end mb-10">
+	                    <time class="font-mono italic opacity-70">USTC</time>
+	                    <div class="text-lg font-black text-primary">中国科学技术大学 · 硕士</div>
+	                    <p class="text-sm opacity-80 mt-1">研究方向：无限感知</p>
+	                </div>
+	                <hr class="bg-primary"/>
+	            </li>
+	            <li>
+	                <hr class="bg-primary"/>
+	                <div class="timeline-start font-mono opacity-70">2019 - 2023</div>
+	                <div class="timeline-middle">
+	                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-primary"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+	                </div>
+	                <div class="timeline-end mb-10">
+	                    <time class="font-mono italic opacity-70">SHU</time>
+	                    <div class="text-lg font-black">上海大学 · 学士</div>
+	                    <p class="text-sm opacity-80 mt-1">智能科学与技术</p>
+	                </div>
+	                <hr />
+	            </li>
+	            <li>
+	                <hr />
+	                <div class="timeline-start font-mono opacity-70">2015 - 2019</div>
+	                <div class="timeline-middle">
+	                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 opacity-50"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+	                </div>
+	                <div class="timeline-end mb-10">
+	                    <div class="text-lg font-black opacity-60">鳌头山 · 道士</div>
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	
+	    <h2 class="text-2xl font-bold mt-6 mb-3">Get in Touch</h2>
+	    <p class="mb-4">Feel free to reach out through:</p>
+	    <ul class="list-disc list-inside mb-4 space-y-2">
+	        <li>GitHub: <a href="https://github.com/Henry-Avery" class="link link-primary">@Henry-Avery</a></li>
+	        <li>X: <a href="https://twitter.com" class="link link-primary">@Henryxxxxxxxxx</a></li>
+	        <li>Email: <code class="bg-base-200 px-2 py-0.5 rounded text-sm">baldur[at]mail.ustc.edu.cn</code></li>
+	    </ul>
+	
+	    <hr class="my-10 border-base-300">
+	
+	    <h2 class="text-2xl font-bold mt-8 mb-6">Vision & Reflections</h2>
+	    <div class="bg-base-200/50 rounded-2xl p-6 md:p-8 italic shadow-inner">
+	        <div class="space-y-4 text-base leading-relaxed opacity-90">
+	            <p>
+	                首先，<strong>AI和5G是一次非常振奋人心的机会，它把整个物理世界、人类活动全都数字化了，通过传感器获得数据就能做到。</strong>比如，一个房间以后装两三百个传感器，完全可以数字化，这只是时间问题。所以，物理世界和数字世界会逐步融合在一起，这是本质上与众不同的一次机会。
+	            </p>
+	            <p>
+	                同时，数字化技术也会改变物理世界，比如基于无人驾驶，新的路网会逐渐产生，一旦有新的路网，城市半径会变大，都市结构会变化，这也是历史上的规律。长期的社会结构因此而变，当然更多人类行为、人类互动都可以被数字化，这将对社会经济产生巨大的影响。
+	            </p>
+	            <p>
+	                纵观历史，每30~40年，就会有新的社会基础技术出现。今天的社会基础技术基本上是电力和大规模的钢材料，40年之后，<strong>每个房间里进来的不仅仅有电，还有AI，AI会成为一种随处可用的公共服务</strong>。
+	            </p>
+	            <p>
+	                其次，这波数字化将促使现有的每一个行业，如农业、制造业、娱乐业、金融业等大规模转型和提升，同时数字化技术有可能提高每一种职业（不管是律师还是厨师）的效率。当然，这其中也有一些需要人类把控的地方，这是整个社会需要做的。
+	            </p>
+	            <p>
+	                最后，教育和医疗也会深受影响。这波数字化浪潮真的是振奋人心，这与它的技术本质有关。我个人认为“深度学习”并非一种很恰当的说法，<strong>其核心本质是一种新的计算基础</strong>，通过重叠向量，很快地把数据放到一个特征空间里，进而解决多种任务。
+	            </p>
+	        </div>
+	        <div class="text-right mt-6 not-italic">
+	            <span class="text-sm font-bold opacity-70">—— 陆奇《未来已来·数字化的长潮与巨浪》</span>
+	        </div>
+	    </div>
+	
+	    <hr class="my-8 border-base-300">
+	
+	    <p class="text-sm opacity-70">
+	        Last updated: January 2026
+	    </p>
 	</div>
 </Layout>
 
@@ -81,30 +135,30 @@ import MainGridLayout from "../components/layout/MainGridLayout.astro";
 		margin-top: 1.5rem;
 		margin-bottom: 0.75rem;
 	}
-
+	
 	.prose p {
 		margin-bottom: 1rem;
 		line-height: 1.7;
 	}
-
+	
 	.prose ul {
 		margin-bottom: 1rem;
 	}
-
+	
 	.prose a {
 		color: oklch(var(--p));
 		text-decoration: underline;
 	}
-
+	
 	.prose a:hover {
 		opacity: 0.8;
 	}
-
+	
 	.prose strong {
 		font-weight: 600;
 		color: oklch(var(--p));
 	}
-
+	
 	.prose hr {
 		margin-top: 2rem;
 		margin-bottom: 2rem;

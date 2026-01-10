@@ -64,20 +64,20 @@
       }
     },
     {
-      "text": "功能展示",
-      "isDropdown": {
-        "discriminant": false,
-        "value": {
-          "link": "/features-demo"
-        }
-      }
-    },
-    {
       "text": "藏书馆",
       "isDropdown": {
         "discriminant": false,
         "value": {
           "link": "/library"
+        }
+      }
+    },
+    {
+      "text": "个人宪法",
+      "isDropdown": {
+        "discriminant": false,
+        "value": {
+          "link": "/posts/person-law"
         }
       }
     }
