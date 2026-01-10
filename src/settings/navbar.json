@@ -55,15 +55,6 @@
       }
     },
     {
-      "text": "Widgets",
-      "isDropdown": {
-        "discriminant": false,
-        "value": {
-          "link": "/widgets/"
-        }
-      }
-    },
-    {
       "text": "藏书馆",
       "isDropdown": {
         "discriminant": false,
