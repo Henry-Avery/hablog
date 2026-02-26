@@ -18,6 +18,8 @@ const currentMonth = now.getMonth();
 const postCountByDate = new Map<string, number>();
 posts.forEach(post => {
   const date = post.data.publishedDate;
+  // Skip posts without a publishedDate
+  if (!date) return;
   const dateKey = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   postCountByDate.set(dateKey, (postCountByDate.get(dateKey) || 0) + 1);
 });
