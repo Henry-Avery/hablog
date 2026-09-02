@@ -1,0 +1,77 @@
+---
+title: vllm测试部署env
+publishedDate: 2026-09-01
+tags:
+  - vllm
+category: Tutorial
+draft: false
+---
+**起docker**
+
+docker pull m.daocloud.io/quay.io/ascend/vllm-ascend:v0.23.0-a3
+
+```
+docker run -it \
+  --name vllm-ascend-test-yyt-qwen \
+  --network host \
+  --shm-size=80g \
+  --device=/dev/davinci0 \
+  --device=/dev/davinci1 \
+  --device=/dev/davinci_manager \
+  --device=/dev/devmm_svm \
+  --device=/dev/hisi_hdc \
+  -v /usr/local/dcmi:/usr/local/dcmi \
+  -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi \
+  -v /usr/local/Ascend/driver/lib64/:/usr/local/Ascend/driver/lib64/ \
+  -v /usr/local/Ascend/driver/version.info:/usr/local/Ascend/driver/version.info \
+  -v /etc/ascend_install.info:/etc/ascend_install.info \
+  -v /mnt/weight:/mnt/weight:ro \
+  -v /home/y00991458/vllm:/workspace/dev/vllm \
+  -v /home/y00991458/vllm-ascend:/workspace/dev/vllm-ascend \
+  m.daocloud.io/quay.io/ascend/vllm-ascend:v0.23.0-a3 \
+  bash
+```
+
+**启动vllm测试**
+
+```
+vllm serve /mnt/weight/Qwen3-8B \
+  --served-model-name qwen3-8b \
+  --host 127.0.0.1 \
+  --port 8000
+```
+
+vllm serve /mnt/weight/Qwen3-8B --served-model-name qwen3-8b --host 127.0.0.1 --port 8000
+
+```
+curl http://127.0.0.1:8000/v1/models
+```
+
+```
+curl http://127.0.0.1:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen3-0.6b",
+    "messages": [
+      {"role": "user", "content": "你好，请简单介绍一下vLLM"}
+    ],
+    "max_tokens": 1024,
+    "temperature": 0
+  }'
+```
+
+**启动bench测试**
+
+which ais_bench
+
+pip show ais_bench_benchmark
+
+pip install ais_bench_benchmark[full]
+
+**源码编译替代**
+
+#### pAI
+
+蓝区随便接入？
+
+那我要接入claude code了
