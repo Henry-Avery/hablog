@@ -25,7 +25,7 @@ nano-vllm
 
 新的开始
 
-```
+````
 -- ==========================================
 -- Hammerspoon 极客信息采集系统 (v2.2 - 最终兼容版)
 -- ==========================================
@@ -35,10 +35,10 @@ nano-vllm
 hs.hotkey.bind({"ctrl", "alt"}, "V", function()
     -- 获取当前日期时间
     local timeStr = os.date("%Y-%m-%d %H:%M:%S")
-
+    
     -- 1. 放入剪贴板 (Maccy 会自动捕获这个变动)
     hs.pasteboard.setContents(timeStr)
-
+    
     -- 2. 直接在当前光标位置模拟打字输入
     hs.eventtap.keyStrokes(timeStr)
 end)
@@ -55,10 +55,120 @@ local function getBrowserData()
     local app = hs.application.frontmostApplication()
     if not app then return nil, nil end
     local appName = app:name()
-
+    
     local script = ""
-
+    
     -- 针对 Chromium 内核浏览器 (Chrome, Edge, Brave)
-".hammerspoon/init.lua" 145L, 4842B
+    if appName == "Google Chrome" or appName == "Microsoft Edge" or appName == "Brave Browser" then
+        script = [[
+            tell application "]] .. appName .. [["
+                try
+                    set theUrl to URL of active tab of front window
+                    set theTitle to title of active tab of front window
+                    return theUrl & "|||" & theTitle
+                on error
+                    return ""
+                end try
+            end tell
+        ]]
+    -- 针对 Safari
+    elseif appName == "Safari" then
+        script = [[
+            tell application "Safari"
+                try
+                    set theUrl to URL of front document
+                    set theTitle to name of front document
+                    return theUrl & "|||" & theTitle
+                on error
+                    return ""
+                end try
+            end tell
+        ]]
+    else
+        return nil, nil
+    end
 
-```
+    local ok, result = hs.applescript(script)
+    if ok and result and result ~= "" then
+        local parts = hs.fnutils.split(result, "|||")
+        if #parts >= 2 then
+            return parts[1], parts[2]
+        end
+    end
+    return nil, nil
+end
+
+-- 3. 辅助函数：智能代码块包裹
+local function wrapCodeIfNeeded(text)
+    local isCode = (string.find(text, "{") and string.find(text, "}"))
+    local hasIndentation = string.find(text, "\n%s%s") or string.find(text, "\n\t")
+    if isCode or hasIndentation then return "```\n" .. text .. "\n```" end
+    return text
+end
+
+-- 4. 核心保存函数
+local function processClipboard(isManual)
+    local text = hs.pasteboard.getContents()
+    local app_obj = hs.application.frontmostApplication()
+    if not text or not app_obj then return end
+    
+    -- 长度和黑名单过滤
+    if not isManual and #text < min_length then return end
+    local app_name = app_obj:name()
+    for black_app, _ in pairs(blacklisted_apps) do
+        if string.find(app_name, black_app) then return end
+    end
+
+    -- 写入逻辑
+    os.execute("mkdir -p '" .. save_folder .. "'")
+    local file_path = save_folder .. os.date("%Y-%m-%d") .. "-c.md"
+    
+    local url, web_title = getBrowserData()
+    local final_text = wrapCodeIfNeeded(text)
+    local win = app_obj:focusedWindow()
+    local win_title = win and win:title() or "未知窗口"
+    
+    local source_md = win_title
+    if url then 
+        source_md = "[" .. (web_title or win_title) .. "](" .. url .. ")" 
+    end
+
+    local tag = isManual and "📌 手动捕获" or "🕒 自动采集"
+    local entry = string.format(
+        "\n---\n### %s %s | 来自: %s\n**场景**: %s\n\n%s\n",
+        tag, os.date("%H:%M:%S"), app_name, source_md, final_text
+    )
+
+    local file = io.open(file_path, "a")
+    if file then
+        file:write(entry)
+        file:close()
+        if isManual then hs.alert.show("已手动记录", 1) end
+    end
+end
+
+-- 5. 自动监听器
+local last_change = hs.pasteboard.changeCount()
+clipWatcher = hs.timer.doEvery(1, function()
+    local new_change = hs.pasteboard.changeCount()
+    if new_change ~= last_change then
+        processClipboard(false)
+        last_change = new_change
+    end
+end)
+
+-- 6. 周日回顾提醒
+hs.timer.doEvery(3600, function()
+    local now = os.date("*t")
+    if now.wday == 1 and now.hour == 10 then
+        hs.notify.new({title = "🚀 周回顾", informativeText = "记得整理本周采集的内容哦！"}):send()
+    end
+end)
+
+-- 7. 手动保存快捷键：Control + Shift + S (换了一个更不容易冲突的组合)
+hs.hotkey.bind({"ctrl", "shift"}, "S", function()
+    processClipboard(true)
+end)
+
+hs.alert.show("✅ 采集系统已启动 (Ctrl+Shift+S 手动)")
+````
