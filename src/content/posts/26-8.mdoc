@@ -11,14 +11,134 @@ vllm
 
 nano-vllm
 
-server挂起服务请求链路解读（kv假请求，Worker进程等）
+**server挂起服务请求链路解读（kv假请求，Worker进程等）**
 
-- Attention metadata 参数
+- **Attention metadata 参数**
 
 复习通信原语，训练策略
 
-大模型新模块架构，GQA，MLA，DSA
+**大模型新模块架构，GQA，MLA，DSA**
 
-特性相关：PD，投机，图模式
+**特性相关：PD，投机，图模式**
 
 硬件底层知识，国产昇腾910和950区别
+
+新的开始
+
+```
+Last login: Mon Jul 13 10:18:44 on console
+Zhuanz@Henrys-MacBook-Air ~ % claude
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ Accessing workspace:
+
+ /Users/Henry
+
+ Quick safety check: Is this a project you created or one you trust? (Like your own code, a well-known open source
+ project, or work from your team). If not, take a moment to review what's in this folder first.
+
+ Claude Code'll be able to read, edit, and execute files here.
+
+ Security guide
+
+   1. Yes, I trust this folder
+ ❯ 2. No, exit
+
+ Enter to confirm · Esc to cancel
+Zhuanz@Henrys-MacBook-Air ~ % ls -la 
+total 424
+drwxr-x---+  51 Zhuanz  staff   1632  9月  3 09:23 .
+drwxr-xr-x    6 root    admin    192 11月  2  2025 ..
+drwxr-xr-x@   5 Zhuanz  staff    160  5月 24 23:13 .cache
+drwxr-xr-x@   8 Zhuanz  staff    256  5月 26 05:15 .cc-switch
+-r--------    1 Zhuanz  staff      9  2月 24  2025 .CFUserTextEncoding
+drwxr-xr-x@   3 Zhuanz  staff     96  9月  9  2025 .cherrystudio
+drwx------   20 Zhuanz  staff    640  6月  1 03:25 .claude
+-rw-------@   1 Zhuanz  staff  37842  6月  1 03:25 .claude.json
+-rw-------    1 Zhuanz  staff  43472  3月 25 21:31 .claude.json.backup
+drwxr-xr-x@  20 Zhuanz  staff    640  5月 24 22:58 .codex
+drwxr-xr-x@   9 Zhuanz  staff    288  7月  2 10:52 .config
+drwxr-xr-x@   4 Zhuanz  staff    128  7月 10  2025 .cursor
+-rw-r--r--@   1 Zhuanz  staff  22532  9月  3 20:02 .DS_Store
+drwxr-xr-x@   4 Zhuanz  staff    128  3月  9 19:52 .E-Study
+drwxr-xr-x@   4 Zhuanz  staff    128  5月  4 11:07 .hammerspoon
+drwxr-xr-x   12 Zhuanz  staff    384  5月  4 11:06 .kimi
+drwxr-xr-x@   5 Zhuanz  staff    160  4月 25 15:18 .local
+drwxr-xr-x@   3 Zhuanz  staff     96  4月  1 02:26 .matplotlib
+drwxr-xr-x@   3 Zhuanz  staff     96  1月 20  2026 .minimax-agent
+drwxr-xr-x    6 Zhuanz  staff    192  5月 24 23:04 .npm
+drwxr-xr-x   33 Zhuanz  staff   1056  1月  6  2026 .nvm
+drwxr-xr-x@   3 Zhuanz  staff     96  4月  6 12:39 .pi
+-rw-r--r--    1 Zhuanz  staff     26  4月 25 15:05 .profile
+drwxr-xr-x@   2 Zhuanz  staff     64  9月  3 10:09 .remio
+drwxr-xr-x@   6 Zhuanz  staff    192  9月  3 12:47 .snipaste
+drwxr-xr-x@   2 Zhuanz  staff     64  9月  3 19:59 .sogouinput
+drwxr-xr-x    7 Zhuanz  staff    224  1月  7  2026 .ssh
+drwx------+   2 Zhuanz  staff     64  8月 19 11:07 .Trash
+drwxr-xr-x    3 Zhuanz  staff     96  6月 10  2025 .vim
+-rw-------    1 Zhuanz  staff  11065  5月  4 11:07 .viminfo
+drwxr-xr-x@   5 Zhuanz  staff    160 11月 13  2025 .vscode
+-rw-r--r--@   1 Zhuanz  staff  49374  8月 23 21:26 .zcompdump
+-rw-r--r--    1 Zhuanz  staff    240 11月 12  2025 .zprofile
+-rw-------    1 Zhuanz  staff  14497  7月  2 11:27 .zsh_history
+drwx------    6 Zhuanz  staff    192  8月 17 15:36 .zsh_sessions
+-rw-r--r--    1 Zhuanz  staff     26  4月 25 15:05 .zshrc
+drwx------@   7 Zhuanz  staff    224  5月 24 23:13 Applications
+-rw-r--r--    1 Zhuanz  staff   5389 11月 12  2025 claude_code_env.sh
+drwx------@  10 Zhuanz  staff    320  9月  3 19:46 Desktop
+drwx------@  33 Zhuanz  staff   1056  7月 15 20:14 Documents
+drwx------  173 Zhuanz  staff   5536  8月 29 11:02 Downloads
+drwxr-xr-x@   2 Zhuanz  staff     64  3月  9 19:52 E-Study
+drwx------@ 104 Zhuanz  staff   3328  4月 29 18:28 Library
+drwx------    3 Zhuanz  staff     96  1月  6  2026 mizuki
+drwx------    8 Zhuanz  staff    256  7月  2 10:40 Movies
+drwx------+   5 Zhuanz  staff    160  2月 27  2025 Music
+drwx------+  10 Zhuanz  staff    320  2月  3  2026 Pictures
+drwxr-xr-x+   5 Zhuanz  staff    160  2月 27  2025 Public
+drwxr-xr-x@   3 Zhuanz  staff     96  9月  9  2025 PycharmProjects
+drwxr-xr-x@   3 Zhuanz  staff     96  7月  6  2025 tmp
+drwxr-xr-x@  10 Zhuanz  staff    320  8月 19 11:02 Zotero
+Zhuanz@Henrys-MacBook-Air ~ % ls -la .hammerspoon 
+total 16
+drwxr-xr-x@  4 Zhuanz  staff   128  5月  4 11:07 .
+drwxr-x---+ 51 Zhuanz  staff  1632  9月  3 09:23 ..
+-rw-r--r--@  1 Zhuanz  staff  4842  5月  4 11:07 init.lua
+drwxr-xr-x@  2 Zhuanz  staff    64  1月  6  2026 Spoons
+Zhuanz@Henrys-MacBook-Air ~ % vim .hammerspoon/init.lua 
+
+-- ==========================================
+-- Hammerspoon 极客信息采集系统 (v2.2 - 最终兼容版)
+-- ==========================================
+
+
+-- 快捷键修改为：Control + Option + T
+hs.hotkey.bind({"ctrl", "alt"}, "V", function()
+    -- 获取当前日期时间
+    local timeStr = os.date("%Y-%m-%d %H:%M:%S")
+
+    -- 1. 放入剪贴板 (Maccy 会自动捕获这个变动)
+    hs.pasteboard.setContents(timeStr)
+
+    -- 2. 直接在当前光标位置模拟打字输入
+    hs.eventtap.keyStrokes(timeStr)
+end)
+
+-- 1. 配置信息
+local save_folder = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Clippings/"
+local min_length = 5
+local blacklisted_apps = {
+    ["1Password"] = true, ["Keychain Access"] = true, ["钥匙串访问"] = true, ["Bank"] = true, ["银行"] = true,
+}
+
+-- 2. 辅助函数：通过具体的 App 名称获取浏览器数据
+local function getBrowserData()
+    local app = hs.application.frontmostApplication()
+    if not app then return nil, nil end
+    local appName = app:name()
+
+    local script = ""
+
+    -- 针对 Chromium 内核浏览器 (Chrome, Edge, Brave)
+".hammerspoon/init.lua" 145L, 4842B
+
+```
