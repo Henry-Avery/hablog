@@ -1,11 +1,11 @@
 {
   "title": "henryavery.cn",
   "hero": {
-    "heroImage": "/images/home/heroImage.webp",
+    "heroImage": "/images/home/hero/heroImage.webp",
     "heroImageAlt": "Henry Avery's Blog",
     "heading": "小天也",
     "subheading": "Life hacker",
-    "intro": "Welcome to my blog -sharing thoughts on tech, development, and life.\n\nDo not go gentle into that good night,\n不要温和地走进那个良夜，\n\nOld age should burn and rave at close of day;\n老人在日落时应当燃烧、怒吼；\n\nRage, rage against the dying of the light.\n怒斥、怒斥那光明的消歇。\n",
+    "intro": "Welcome to my blog - sharing thoughts on tech, development, and life.                        \n\nDo not go gentle into that good night,\n不要温和地走进那个良夜，\n\nOld age should burn and rave at close of day;\n老人在日落时应当燃烧、怒吼；\n\nRage, rage against the dying of the light.\n怒斥、怒斥那光明的消歇。\n",
     "buttons": [
       {
         "label": "About Me",
