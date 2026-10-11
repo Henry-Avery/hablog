@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import { getCollection, getEntry } from 'astro:content'
+import { getSortedPosts } from '@utils/content-utils'
 
 export interface Props {
   posts?: any[]  // Accept pre-filtered posts
@@ -10,7 +10,7 @@ export interface Props {
 const { posts: providedPosts, maxPosts = 3 }: Props = Astro.props
 
 // Use provided posts or fetch all
-const posts = providedPosts || await getCollection('posts')
+const posts = providedPosts || await getSortedPosts()
 
 ---
 <ul class="flex flex-wrap items-stretch justify-center gap-6">

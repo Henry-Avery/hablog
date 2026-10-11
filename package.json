@@ -2,6 +2,11 @@
   "name": "@keystatic/templates-astro",
   "version": "0.0.38",
   "license": "MIT",
+  "packageManager": "pnpm@10.22.0",
+  "engines": {
+    "node": ">=22.14.0 <25",
+    "pnpm": "10.22.0"
+  },
   "dependencies": {
     "@astrojs/markdoc": "^0.15.1",
     "@astrojs/react": "^4.3.0",
@@ -40,12 +45,13 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "pnpm run clean:images && astro build && pagefind --site .vercel/output/static",
+    "build": "astro build && pagefind --site .vercel/output/static",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write ./src",
-    "clean:images": "node scripts/clean-orphaned-images.js",
-    "predev": "pnpm run clean:images"
+    "check:images": "node scripts/check-orphaned-images.mjs",
+    "clean:images": "node scripts/check-orphaned-images.mjs",
+    "test": "node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "pagefind": "^1.4.0",
