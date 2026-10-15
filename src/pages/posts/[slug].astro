@@ -72,7 +72,7 @@ export async function getStaticPaths() {
         {imageExists && featuredImage && (
           <Image
             src={featuredImage}
-            alt={post?.data?.imageAlt || 'Featured Image'}
+            alt={post.data.imgAlt || post.data.imageAlt || 'Featured Image'}
             width={1000}
             height={500}
             class="object-cover w-full rounded-lg"

@@ -26,6 +26,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
+      - run: pnpm post:check
       - run: pnpm run check:images
       - run: pnpm build
       - name: Ensure build does not modify tracked sources

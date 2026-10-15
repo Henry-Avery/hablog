@@ -2,7 +2,22 @@
 
 [博客](https://henryavery.cn) · [Vercel 地址](https://hablog.vercel.app)
 
-使用 Astro 5、Keystatic、React/Svelte、Tailwind CSS 和 Pagefind。文章保存在 GitHub 中，Vercel 负责提供服务。私有笔记和未公开资料放在独立的 `Henry-Avery/cloud-workspace` 仓库。
+使用 Astro 5、Keystatic、React/Svelte、Tailwind CSS 和 Pagefind。文章保存在 GitHub 中，Vercel 负责提供服务。私有笔记和未公开资料请存入另一个已确认同步成功的私有仓库。
+
+## 让 Codex 帮你写和维护
+
+可以直接说：“把这段文字整理成一篇随手记”“给这篇文章补上我提供的图片”“根据这些材料整理本周复盘”“把藏书馆中这本书改成已读”。Codex 的仓库操作入口是 [AGENTS.md](AGENTS.md)，完整流程见 [写作与发布指南](docs/WRITING.md)。
+
+常用命令：
+
+```bash
+pnpm post:new my-reading-note --title "这次读书想到的事" --template reading
+pnpm post:list
+pnpm post:check my-reading-note --ready
+pnpm post:publish my-reading-note
+```
+
+`post:new` 默认创建草稿，可选普通文章、随手记、读书、论文、周复盘和工具收藏模板。`post:publish` 只修改本地草稿标记；提交、推送、合并到 `main` 并部署成功后，网站才会更新。首次使用请先按下面步骤安装依赖；也可以将 `pnpm` 替换为 `corepack pnpm@10.22.0`。
 
 ## 云端或本地启动
 
@@ -35,6 +50,7 @@ corepack pnpm@10.22.0 dev --host 0.0.0.0
 
 ```bash
 corepack pnpm@10.22.0 test
+corepack pnpm@10.22.0 post:check
 corepack pnpm@10.22.0 run check:images
 corepack pnpm@10.22.0 build
 ```
@@ -42,7 +58,7 @@ corepack pnpm@10.22.0 build
 - `build` 先执行 Astro 构建，再对 `.vercel/output/static` 生成 `_pagefind` 搜索索引。
 - `dev` 和 `build` 不删除源图片。`check:images` 仅报告待复查目录；旧命令 `clean:images` 也只做检查。详情见 [图片检查说明](IMAGE_CLEANUP_SYSTEM.md)。
 - 当前使用 Vercel 服务端适配器；生产预览应使用 Vercel 的预览部署。`astro preview` 不支持这个适配器的完整服务端运行，开发服务器也不会生成生产搜索索引。
-- Pull Request 和 `main` 推送会自动执行测试、图片检查和构建，并检查构建是否修改已跟踪文件。
+- Pull Request 和 `main` 推送会自动执行测试、文章检查、图片检查和构建，并检查构建是否修改已跟踪文件。
 
 ## 协作与保存
 
