@@ -2,7 +2,8 @@
 // 告诉 Astro 这个页面要在构建时生成静态 HTML（用于博客文章）
 export const prerender = true;
 
-import { getCollection, getEntry, render } from 'astro:content'
+import { getEntry, render } from 'astro:content'
+import { getSortedPosts } from '@utils/content-utils'
 import Layout from '@layouts/Layout.astro'
 import MainGridLayout from '@components/layout/MainGridLayout.astro'
 import { Image } from 'astro:assets'
@@ -18,7 +19,7 @@ if (!slug || slug === 'undefined') {
 
 const post = await getEntry('posts', slug)
 
-if (!post) {
+if (!post || (import.meta.env.PROD && post.data.draft)) {
   return Astro.redirect('/posts')
 }
 
@@ -54,7 +55,7 @@ if (post.data.featuredImage) {
 
 // Generate static pages
 export async function getStaticPaths() {
-  const posts = await getCollection('posts')
+  const posts = await getSortedPosts()
   return posts.map((post) => ({ params: { slug: post.id } }))
 }
 ---
@@ -71,7 +72,7 @@ export async function getStaticPaths() {
         {imageExists && featuredImage && (
           <Image
             src={featuredImage}
-            alt={post?.data?.imageAlt || 'Featured Image'}
+            alt={post.data.imgAlt || post.data.imageAlt || 'Featured Image'}
             width={1000}
             height={500}
             class="object-cover w-full rounded-lg"
@@ -79,13 +80,13 @@ export async function getStaticPaths() {
           />
         )}
         <h1 class="text-5xl font-bold">{post.data.title}</h1>
-        <div class="text-sm opacity-60 mb-6">
+        {post.data.publishedDate && <div class="text-sm opacity-60 mb-6">
           Published on {post.data.publishedDate.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
           })}
-        </div>
+        </div>}
 
         <!-- Category and Tags Display -->
         <div class="flex flex-wrap gap-2 mb-6 not-prose">

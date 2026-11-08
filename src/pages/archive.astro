@@ -2,9 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import ArchivePanel from '../components/ArchivePanel.svelte';
 import MainGridLayout from '../components/layout/MainGridLayout.astro';
-import { getCollection } from 'astro:content';
+import { getSortedPosts } from '@utils/content-utils';
 
-const posts = await getCollection('posts');
+const posts = await getSortedPosts();
 
 // Convert to the format expected by ArchivePanel
 const formattedPosts = posts.map(post => ({

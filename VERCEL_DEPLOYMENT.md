@@ -293,7 +293,7 @@
 **检查:**
 - 图片路径是否正确
 - 图片文件是否已推送到 GitHub
-- 自动清理脚本是否误删了需要的图片
+- 运行 `pnpm run check:images` 检查图片目录；此命令不会删除文件
 
 ### 4. 搜索功能不工作
 
@@ -302,7 +302,7 @@
 **解决方案:**
 确保 `package.json` 中的 build 命令包含 pagefind:
 ```json
-"build": "npm run clean:images && astro build && pagefind --site dist"
+"build": "astro build && pagefind --site .vercel/output/static"
 ```
 
 ### 5. 推送到 GitHub 失败

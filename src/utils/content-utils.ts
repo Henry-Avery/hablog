@@ -1,18 +1,12 @@
 import { type CollectionEntry, getCollection } from "astro:content";
+import { selectPosts } from "./post-policy.mjs";
 
 // 获取排序后的文章列表
 async function getRawSortedPosts() {
-	const allBlogPosts = await getCollection("posts", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
+	const allBlogPosts = await getCollection("posts");
+	return selectPosts(allBlogPosts, {
+		includeDrafts: import.meta.env.DEV,
 	});
-
-	const sorted = allBlogPosts.sort((a, b) => {
-		// 按发布日期排序（新的在前）
-		const dateA = new Date(a.data.publishedDate);
-		const dateB = new Date(b.data.publishedDate);
-		return dateA > dateB ? -1 : 1;
-	});
-	return sorted;
 }
 
 export async function getSortedPosts() {
@@ -31,7 +25,7 @@ export async function getSortedPostsList(): Promise<PostForList[]> {
 	// 简化的文章列表（不包含 body）
 	const sortedPostsList = sortedFullPosts.map((post) => ({
 		id: post.id,
-		slug: post.slug,
+		slug: post.id,
 		data: post.data,
 	}));
 
@@ -44,9 +38,7 @@ export type Tag = {
 };
 
 export async function getTagList(): Promise<Tag[]> {
-	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
-	});
+	const allBlogPosts = await getRawSortedPosts();
 
 	const countMap: { [key: string]: number } = {};
 	allBlogPosts.forEach((post: { data: { tags: string[] } }) => {
@@ -70,9 +62,7 @@ export type Category = {
 };
 
 export async function getCategoryList(): Promise<Category[]> {
-	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
-	});
+	const allBlogPosts = await getRawSortedPosts();
 
 	const count: { [key: string]: number } = {};
 	allBlogPosts.forEach((post: { data: { category?: string | null } }) => {
