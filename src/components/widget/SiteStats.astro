@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getSortedPosts } from '@utils/content-utils';
 
 interface Props {
   class?: string;
@@ -11,7 +11,7 @@ const { class: className } = Astro.props;
 const siteStartDate = "2026-01-01";
 
 // Get all posts
-const posts = await getCollection('posts');
+const posts = await getSortedPosts();
 
 // Calculate total words
 let totalWords = 0;
@@ -30,14 +30,8 @@ function formatNumber(num: number): string {
 }
 
 // Get latest post date
-const latestPost = posts.reduce((latest, post) => {
-  if (!latest) return post;
-  return post.data.publishedDate > latest.data.publishedDate ? post : latest;
-}, posts[0]);
-
-const lastPostDate = latestPost
-  ? latestPost.data.publishedDate.toISOString()
-  : null;
+const lastPostDate = posts.find(post => post.data.publishedDate)
+  ?.data.publishedDate?.toISOString() ?? null;
 
 const stats = [
   {
